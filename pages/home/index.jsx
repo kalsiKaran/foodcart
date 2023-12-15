@@ -5,12 +5,17 @@ import Carousel from "../../components/Carousel";
 import Customers from "../../components/customers/Customers";
 import MenuWrapper from "../../components/product/MenuWrapper";
 
+import { useCustomContext } from "../../context/customContext";
+
 const Index = ({ categoryList, productList }) => {
+
+  const { categories } = useCustomContext();
+
   return (
     <React.Fragment>
       <Carousel />
-      <Campaigns categoryList={categoryList} productList={productList} />
-      <MenuWrapper categoryList={categoryList} productList={productList} />
+      <Campaigns categoryList={categories} productList={productList} />
+      {/* <MenuWrapper categoryList={categoryList} productList={productList} /> */}
       <About />
       <Customers />
     </React.Fragment>

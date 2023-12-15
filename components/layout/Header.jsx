@@ -39,11 +39,7 @@ const Header = () => {
       className={`h-[5.5rem] z-50 w-full ${
         isScrolled || router.asPath !== "/" ?  "bg-secondary sticky top-0" : "relative bg-transparent"
       }`}
-      // className={`h-[5.5rem] z-50 relative w-full ${
-      //   isScrolled || router.asPath === "/" ? "bg-transparent fixed" : "bg-secondary"
-      // }`}
     >
-      {console.log(isScrolled)}
       <div className="container mx-auto text-white flex justify-between items-center h-full">
         <Logo />
         <nav

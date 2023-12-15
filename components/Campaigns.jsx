@@ -21,7 +21,7 @@ const CampaignItem = ({ category, productList }) => {
       <Link href='/menu'>
         <div className="bg-secondary flex-1 relative rounded-md overflow-hidden flex items-center justify-between mx-2 cursor-pointer">
             <Image
-              src={filter[0]?.img}
+              src={category.thumbnail}
               alt=""
               layout="fill"
               className=" transition-all absolute object-cover rounded-2xl z-0"
