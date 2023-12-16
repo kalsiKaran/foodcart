@@ -19,12 +19,12 @@ const CampaignItem = ({ category, productList }) => {
 
   return (
       <Link href='/menu'>
-        <div className="bg-secondary flex-1 relative rounded-md overflow-hidden flex items-center justify-between mx-2 cursor-pointer">
+        <div className="bg-secondary flex-1 relative rounded-md overflow-hidden flex items-center justify-between mx-2 cursor-pointer overflow-hidden group">
             <Image
-              src={category.thumbnail}
+              src={filter[0]?.img}
               alt=""
               layout="fill"
-              className=" transition-all absolute object-cover rounded-2xl z-0"
+              className="absolute object-cover rounded-2xl z-0 group-hover:scale-110 transition-all duration-500"
               priority
             />
           <div className="text-white z-10 bg-gray-900 bg-opacity-75 py-10 h-full w-full">
@@ -44,14 +44,15 @@ const settings = {
   arrows: false,
   autoplay: true,
   autoplaySpeed: 3000,
-  appenDots: (dots) => (
-    <div>
-      <ul className="my-10 justify-center">{dots}</ul>
-    </div>
-  ),
-  customPaging: (i) => (
-    <div className="w-3 h-3 border bg-white rounded-full mt-1"></div>
-  ),
+  responsive: [
+    {
+      breakpoint: 576, // Adjust this breakpoint to target mobile devices
+      settings: {
+        slidesToShow: 1, // Show 1 slide on mobile devices
+        slidesToScroll: 1,
+      },
+    },
+  ],
 };
 
 const Campaigns = ({ categoryList, productList }) => {

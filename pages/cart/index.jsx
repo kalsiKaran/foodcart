@@ -25,13 +25,22 @@ const Cart = ({ userList }) => {
   const user = userList?.find((user) => user.email === session?.user?.email);
 
   const [productState, setProductState] = useState([]);
+  const [tableId, setTableId] = useState(null);
+  
+  useEffect(() => {
+    const storedTableId = localStorage.getItem('tableId');
+    setTableId(storedTableId);
+  }, []);
+
 
   const newOrder = {
     customer: user?.fullName,
     address: user?.address ? user?.address : "No address",
+    price: cart.price,
     total: cart.total,
     products: productState,
     method: 0,
+    tableId: tableId || null
   };
 
   useEffect(() => {
@@ -44,10 +53,9 @@ const Cart = ({ userList }) => {
     });
     setProductState(productTitles);
   }, [cart.products]);
-  console.log(productState);
   const createOrder = async () => {
     try {
-      if (session) {
+      if (session || tableId) {
         if (confirm("Are you sure you want to create this order?")) {
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/orders`,
@@ -129,14 +137,14 @@ const Cart = ({ userList }) => {
 
             <div className="mt-2">
               
-              <p className="mt-2 font-bold text-gray-500">Subtotal: <span className="mt-5 text-gray-900 font-bold">${cart.total}</span></p>
-              <p className="mt-2 font-bold text-gray-500">Discount: <span className="mt-5 text-gray-900 font-bold">$0.00</span></p>
-              <p className="mt-2 font-bold text-gray-500">Total: <span className="mt-5 text-gray-900 font-bold">${cart.total}</span></p>
+              <p className="mt-4 font-bold text-gray-500 flex justify-between">Subtotal: <span className="text-gray-900 font-bold">${cart.total}</span></p>
+              <p className="mt-4 font-bold text-gray-500 flex justify-between">Discount: <span className="text-gray-900 font-bold">$0.00</span></p>
+              <p className="mt-4 font-bold text-gray-500 flex justify-between">Total: <span className="text-gray-900 font-bold">${cart.total}</span></p>
             </div>
 
             <div>
               <button
-                className="text-white text-md font-semibold bg-amber-400 mt-8 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 whitespace-nowrap"
+                className="w-full text-white text-md font-semibold bg-amber-400 mt-8 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 whitespace-nowrap"
                 onClick={createOrder}
               >
                 CHECKOUT NOW!
