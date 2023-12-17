@@ -10,7 +10,7 @@ const Index = ({ categoryList, productList }) => {
   return (
     <React.Fragment>
       <Carousel />
-      <Campaigns categoryList={categoryList} productList={productList} />
+      <Campaigns categoryList={categoryList} />
       <MenuWrapper categoryList={categoryList} productList={productList} />
       <About />
       <Customers />

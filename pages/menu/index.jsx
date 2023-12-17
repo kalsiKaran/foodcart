@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 
 const Index = ({ categoryList, productList }) => {
+  console.log(categoryList, productList)
   const router = useRouter();
 
   useEffect(() => {
@@ -22,15 +23,15 @@ const Index = ({ categoryList, productList }) => {
 
 export const getServerSideProps = async () => {
   const category = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/categories`
+    `${process.env.API_URL}/menu`
   );
   const product = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/products`
+    `${process.env.API_URL}/products`
   );
   return {
     props: {
-      categoryList: category.data ? category.data : [],
-      productList: product.data ? product.data : [],
+      categoryList: category.data ? category.data.categories : [],
+      productList: product.data ? product.data.products : [],
     },
   };
 };

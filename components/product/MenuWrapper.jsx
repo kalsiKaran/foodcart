@@ -11,8 +11,8 @@ const MenuWrapper = ({ categoryList, productList }) => {
     setFilter(
       productList.filter(
         (product) =>
-          product.category.toLowerCase() ===
-          categoryList[active].title.toLowerCase()
+          product.category_id ==
+          categoryList[active].id
       )
     );
   }, [categoryList, active, productList]);
@@ -28,13 +28,13 @@ const MenuWrapper = ({ categoryList, productList }) => {
                 className={`px-6 py-2 font-semibold ${
                   index === active && "bg-gradient-to-b from-gray-900 to-gray-600 text-white "
                 } ml-4 rounded-3xl `}
-                key={category._id}
+                key={category.id}
                 onClick={() => {
                   setActive(index);
                   setProductLimit(3);
                 }}
               >
-                {category.title}
+                {category.name}
               </button>
             ))}
         </div>
@@ -43,7 +43,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
         {filter.length > 0 &&
           filter
             .slice(0, productLimit)
-            .map((product) => <MenuItem key={product._id} product={product} />)}
+            .map((product) => <MenuItem key={product.id} product={product} />)}
       </div>
       {productLimit <= filter.length &&
         <div className="flex items-center justify-center my-8">

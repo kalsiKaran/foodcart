@@ -1,6 +1,5 @@
 import Category from "../../../models/Category";
 import dbConnect from "../../../util/dbConnect";
-import axios from 'axios';
 
 const handler = async (req, res) => {
   await dbConnect();
