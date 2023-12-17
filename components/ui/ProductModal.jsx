@@ -85,14 +85,26 @@ const ProductModal = ({ setIsProductModal, product }) => {
 
               <p className="font-bold text-md mt-3">Extras</p>
               {product.extraOptions.map((item) => (
-                <label className={`${isChecked ? 'bg-red-400' : 'bg-red-50'} cursor-pointer rounded-md px-2 shadow-sm inline-flex py-1 transition-all duration-300`} key={item._id}>
-                  <input
-                    type="checkbox"
-                    className="hidden"
-                    onChange={(e) => handleExtras(e, item)}
-                  />
-                  <span className={`text-xs uppercase font-semibold ${isChecked ? 'text-white' : 'text-red-500 transition-all duration-300'}`}>{item.text}</span>
+                <label className="inline-flex cursor-pointer items-center rounded-full">
+                  <div className="relative inline-flex">
+                    <input
+                      type="checkbox"
+                      className="peer relative h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-gray-300 transition-all checked:border-red-400 checked:bg-red-400 hover:scale-110" onChange={(e) => handleExtras(e, item)} />
+                    <div className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                      <i className="fas fa-check text-xs"></i>
+                    </div>
+                  </div>
+                  <span className='text-xs uppercase font-bold ml-2'>{item.text}</span>
                 </label>
+
+                // <label className={`${isChecked ? 'bg-red-400' : 'bg-red-50'} cursor-pointer rounded-md px-2 shadow-sm inline-flex py-1 transition-all duration-300`} key={item._id}>
+                //   <input
+                //     type="checkbox"
+                //     className="hidden"
+                //     onChange={(e) => handleExtras(e, item)}
+                //   />
+                //   <span className={`text-xs uppercase font-semibold ${isChecked ? 'text-white' : 'text-red-500 transition-all duration-300'}`}>{item.text}</span>
+                // </label>
               ))}
 
               <div>

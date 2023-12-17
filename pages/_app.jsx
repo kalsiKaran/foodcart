@@ -16,8 +16,6 @@ import { Router, useRouter } from "next/router";
 
 import nProgress from "nprogress";
 
-import { CustomContextProvider } from "../context/customContext";
-
 Router.events.on("routeChangeStart", () => nProgress.start());
 Router.events.on("routeChangeComplete", () => nProgress.done());
 Router.events.on("routeChangeError", () => nProgress.done());
@@ -27,7 +25,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <Provider store={store}>
-        <CustomContextProvider>
           {router.pathname.startsWith("/admin") ? (
             <div className="bg-[#ececec] h-screen">
               <ToastContainer />
@@ -39,7 +36,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
               <Component {...pageProps} />
             </Layout>
           )}
-        </CustomContextProvider>
       </Provider>
     </SessionProvider>
   );
