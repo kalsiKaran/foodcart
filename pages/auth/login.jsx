@@ -10,44 +10,51 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { data: session } = useSession();
-  const { push } = useRouter();
-  const [currentUser, setCurrentUser] = useState();
+  // const { data: session } = useSession();
+  // const { push } = useRouter();
+  // const [currentUser, setCurrentUser] = useState();
 
   const onSubmit = async (values, actions) => {
-    const { email, password } = values;
-    let options = { redirect: false, email, password };
+    const { phone, password } = values;
+    let options = { redirect: false, phone, password };
     try {
       const res = await signIn("credentials", options);
-      actions.resetForm();
-      toast.success("Login successfully", {
-        position: "bottom-left",
-        theme: "colored",
-      });
+      if (!res.ok) {
+        toast.error('Login failed', {
+          position: 'bottom-left',
+          theme: 'colored',
+        });
+      } else {
+        actions.resetForm();
+        toast.success('Login successfully', {
+          position: 'bottom-left',
+          theme: 'colored',
+        });
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() => {
-    const getUser = async () => {
-      try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-        setCurrentUser(
-          res.data?.find((user) => user.email === session?.user?.email)
-        );
-        session && push("/profile/" + currentUser?._id);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getUser();
-  }, [session, push, currentUser]);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     try {
+  //       const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+  //       setCurrentUser(
+  //         res.data?.find((user) => user.phone === session?.user?.phone)
+  //       );
+  //       session && push("/profile/" + currentUser?._id);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   getUser();
+  // }, [session, push, currentUser]);
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: {
-        email: "",
+        phone: "",
         password: "",
       },
       onSubmit,
@@ -57,12 +64,12 @@ const Login = () => {
   const inputs = [
     {
       id: 1,
-      name: "email",
-      type: "email",
-      placeholder: "Your Email Address",
-      value: values.email,
-      errorMessage: errors.email,
-      touched: touched.email,
+      name: "phone",
+      type: "phone",
+      placeholder: "Your phone Address",
+      value: values.phone,
+      errorMessage: errors.phone,
+      touched: touched.phone,
     },
     {
       id: 2,
@@ -107,23 +114,23 @@ const Login = () => {
   );
 };
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+// export async function getServerSideProps({ req }) {
+//   const session = await getSession({ req });
 
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-  const user = res.data?.find((user) => user.email === session?.user.email);
-  if (session && user) {
-    return {
-      redirect: {
-        destination: "/profile/" + user._id,
-        permanent: false,
-      },
-    };
-  }
+//   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+//   const user = res.data?.find((user) => user.email === session?.user.email);
+//   if (session && user) {
+//     return {
+//       redirect: {
+//         destination: "/profile/" + user._id,
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {},
-  };
-}
+//   return {
+//     props: {},
+//   };
+// }
 
 export default Login;

@@ -99,7 +99,12 @@ const Cart = ({ userList }) => {
                 {cart.products.map((product) => (
                     <div key={product._id} className="container mx-auto p-6 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
                       <div className="h-[200px] overflow-hidden relative rounded-xl ">
-                        <Image className="h-full w-full object-cover transition duration-500 hover:scale-110" src={product.img} layout="fill" />
+                        {product.product_image ? 
+                          <Image className="h-full w-full object-cover transition duration-500 hover:scale-110" src={product.img} layout="fill" />:
+                          <div className="animate-pulse h-full w-full">
+                            <div className="h-full w-full bg-slate-200"></div>
+                          </div>
+                        }
                       </div>
                       <div>
                         <div>

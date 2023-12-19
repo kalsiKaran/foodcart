@@ -11,12 +11,12 @@ const ProductModal = ({ setIsProductModal, product }) => {
   const cart = useSelector((state) => state.cart);
 
   const dispatch = useDispatch();
-  const findCart = cart.products.find((item) => item._id === product._id);
-
+  const findCart = cart.products.find((item) => item._id === product.id);
+  console.log(product)
 
   const [foodQuantity, setFoodQuantity] = useState(1);
-  const [TotalPrice, setTotalPrice] = useState(product.prices[0]);
-  const [Price, setPrice] = useState(product.prices[0]);
+  const [TotalPrice, setTotalPrice] = useState(product.selling_price);
+  const [Price, setPrice] = useState(product.selling_price);
   const [extras, setExtras] = useState([]);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -69,21 +69,26 @@ const ProductModal = ({ setIsProductModal, product }) => {
           <div className="relative grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-10  z-50 md:w-full w-[370px] bg-white p-10 rounded-2xl">
           
             <div className="relative w-full md:h-full h-56 w-full md:w-64 rounded-xl overflow-hidden">
-              <Image
-                src={product.img}
-                alt=""
-                layout="fill"
-                className="w-full object-cover"
-              />
+              {product.product_image ? 
+                <Image
+                  src={product.product_image}
+                  alt=""
+                  layout="fill"
+                  className="w-full object-cover"
+                />:
+                <div className="animate-pulse h-full w-full">
+                  <div className="h-full w-full bg-slate-200"></div>
+                </div>
+              }
             </div>
 
             <div>
-              <Link href={`/product/${product._id}`}>
-                <Title addClass="text-[32px] cursor-pointer hover:text-amber-500 transition-all duration-500">{product.title}</Title>
+              <Link href={`/product/${product.id}`}>
+                <Title addClass="text-[32px] cursor-pointer hover:text-amber-500 transition-all duration-500">{product.product_name}</Title>
               </Link>
               <p className="font-bold text-red-500 text-xl">${Price}</p>
 
-              <p className="font-bold text-md mt-3">Extras</p>
+              {/* <p className="font-bold text-md mt-3">Extras</p>
               {product.extraOptions.map((item) => (
                 <label className="inline-flex cursor-pointer items-center rounded-full">
                   <div className="relative inline-flex">
@@ -96,16 +101,7 @@ const ProductModal = ({ setIsProductModal, product }) => {
                   </div>
                   <span className='text-xs uppercase font-bold ml-2'>{item.text}</span>
                 </label>
-
-                // <label className={`${isChecked ? 'bg-red-400' : 'bg-red-50'} cursor-pointer rounded-md px-2 shadow-sm inline-flex py-1 transition-all duration-300`} key={item._id}>
-                //   <input
-                //     type="checkbox"
-                //     className="hidden"
-                //     onChange={(e) => handleExtras(e, item)}
-                //   />
-                //   <span className={`text-xs uppercase font-semibold ${isChecked ? 'text-white' : 'text-red-500 transition-all duration-300'}`}>{item.text}</span>
-                // </label>
-              ))}
+              ))} */}
 
               <div>
                 <p className="font-bold text-md mt-3">Select Quantity</p>
@@ -126,7 +122,7 @@ const ProductModal = ({ setIsProductModal, product }) => {
               className="absolute  top-4 right-4"
               onClick={() => setIsProductModal(false)}
             >
-              <GiCancel size={25} className="hover:scale-110 transition-all" />
+              <GiCancel size={25} className="hover:text-red-500 hover:scale-110 transition-all" />
             </button>
           </div>
         </div>

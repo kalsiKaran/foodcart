@@ -15,7 +15,7 @@ const Register = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
         values
       );
-      if (res.status === 200) {
+      if (res.status === 201) {
         toast.success("User created successfully");
         push("/auth/login");
       }
@@ -28,10 +28,10 @@ const Register = () => {
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: {
-        fullName: "",
-        email: "",
+        name: "",
+        phone: "",
         password: "",
-        confirmPassword: "",
+        c_password: "",
       },
       onSubmit,
       validationSchema: registerSchema,
@@ -40,21 +40,21 @@ const Register = () => {
   const inputs = [
     {
       id: 1,
-      name: "fullName",
+      name: "name",
       type: "text",
       placeholder: "Your Full Name",
-      value: values.fullName,
-      errorMessage: errors.fullName,
-      touched: touched.fullName,
+      value: values.name,
+      errorMessage: errors.name,
+      touched: touched.name,
     },
     {
       id: 2,
-      name: "email",
-      type: "email",
-      placeholder: "Your Email Address",
-      value: values.email,
-      errorMessage: errors.email,
-      touched: touched.email,
+      name: "phone",
+      type: "text",
+      placeholder: "Your Phone Number",
+      value: values.phone,
+      errorMessage: errors.phone,
+      touched: touched.phone,
     },
     {
       id: 3,
@@ -67,12 +67,12 @@ const Register = () => {
     },
     {
       id: 4,
-      name: "confirmPassword",
+      name: "c_password",
       type: "password",
       placeholder: "Your Password Again",
-      value: values.confirmPassword,
-      errorMessage: errors.confirmPassword,
-      touched: touched.confirmPassword,
+      value: values.c_password,
+      errorMessage: errors.c_password,
+      touched: touched.c_password,
     },
   ];
 

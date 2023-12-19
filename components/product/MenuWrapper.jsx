@@ -45,7 +45,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
             .slice(0, productLimit)
             .map((product) => <MenuItem key={product.id} product={product} />)}
       </div>
-      {productLimit <= filter.length &&
+      {productLimit < filter.length &&
         <div className="flex items-center justify-center my-8">
           <button
             className="btn-primary"
