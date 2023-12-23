@@ -3,53 +3,14 @@ import Link from "next/link";
 import Input from "../../components/form/Input";
 import Title from "../../components/ui/Title";
 import { loginSchema } from "../../schema/login";
-import { getSession, signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import { login } from "../../components/Login";
 
 const Login = () => {
-  // const { data: session } = useSession();
-  // const { push } = useRouter();
-  // const [currentUser, setCurrentUser] = useState();
 
-  const onSubmit = async (values, actions) => {
+  const onSubmit = async (values) => {
     const { phone, password } = values;
-    let options = { redirect: false, phone, password };
-    try {
-      const res = await signIn("credentials", options);
-      if (!res.ok) {
-        toast.error('Login failed', {
-          position: 'bottom-left',
-          theme: 'colored',
-        });
-      } else {
-        actions.resetForm();
-        toast.success('Login successfully', {
-          position: 'bottom-left',
-          theme: 'colored',
-        });
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    login(phone, password);
   };
-
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     try {
-  //       const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-  //       setCurrentUser(
-  //         res.data?.find((user) => user.phone === session?.user?.phone)
-  //       );
-  //       session && push("/profile/" + currentUser?._id);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   getUser();
-  // }, [session, push, currentUser]);
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
@@ -114,23 +75,22 @@ const Login = () => {
   );
 };
 
-// export async function getServerSideProps({ req }) {
-//   const session = await getSession({ req });
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const token = req.cookies.token || '';
+  
+  if(token){
+    return{
+      redirect: {
+        destination: '/menu',
+        permanent: false
+      }
+    }
+  }
 
-//   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-//   const user = res.data?.find((user) => user.email === session?.user.email);
-//   if (session && user) {
-//     return {
-//       redirect: {
-//         destination: "/profile/" + user._id,
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {},
-//   };
-// }
+  return {
+    props: {},
+  };
+}
 
 export default Login;

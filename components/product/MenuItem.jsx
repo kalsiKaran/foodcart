@@ -39,7 +39,7 @@ const MenuItem = ({ product }) => {
               <h6 className="mr-2">Add TO CART</h6><RiShoppingCart2Fill />
           </button>
 
-      { isProductModal && <ProductModal setIsProductModal={setIsProductModal} product={product} /> }
+      { isProductModal && <ProductModal setIsProductModal={setIsProductModal} productId={product.id} /> }
     </div>
   );
 };

@@ -1,7 +1,6 @@
-import axios from 'axios';
-
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import axios from 'axios';
 import { BASE_URL } from '../../../constants';
 
 export default NextAuth({
@@ -12,17 +11,13 @@ export default NextAuth({
         phone: { label: 'Phone number', type: 'text', placeholder: 'Enter your Phone Number' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials) {
-        const user = {
-          phone: credentials.phone,
-          password: credentials.password,
-        };
-
+      async authorize(credentials, req) {
         try {
-          const response = await axios.post(`${BASE_URL}/auth/login`, user);
+          const response = await axios.post(`${BASE_URL}/auth/login`, credentials);
 
           if (response.status === 200) {
-            return { status: 'success', data: response.data };
+            const user = response.data;
+            return Promise.resolve(user);
           } else {
             throw new Error(response.data.message || 'Login failed');
           }
@@ -32,4 +27,7 @@ export default NextAuth({
       },
     }),
   ],
+  pages: {
+    signIn: "/auth/login"
+  }
 });

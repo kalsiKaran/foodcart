@@ -4,39 +4,30 @@ import { RiShoppingCart2Fill } from "react-icons/ri";
 import { addProduct } from "../../redux/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Title from "../../components/ui/Title";
 
-const Index = ({ food }) => {
-  const [prices, setPrices] = useState(food.prices);
-  const [price, setPrice] = useState(prices[0]);
+const Index = ({ food, Variants }) => {
+  console.log(food, Variants)
+
+  const [prices, setPrices] = useState(food.selling_price);
+  const [price, setPrice] = useState(prices);
   const [size, setSize] = useState(0);
   const [extraItems, setExtraItems] = useState(food?.extraOptions);
-  const [extras, setExtras] = useState([]);
+  const [variant, setVariant] = useState([]);
   const cart = useSelector((state) => state.cart);
+
 
   const findCart = cart.products.find((item) => item._id === food._id);
 
   const dispatch = useDispatch();
 
-  const handleSize = (sizeIndex) => {
-    const difference = prices[sizeIndex] - prices[size];
-    setSize(sizeIndex);
-    changePrice(difference);
-  };
-
   const changePrice = (number) => {
-    setPrice(price + number);
+    setPrice(number);
   };
 
-  const handleChange = (e, item) => {
-    const checked = e.target.checked;
-
-    if (checked) {
-      changePrice(item.price);
-      setExtras([...extras, item]);
-    } else {
-      changePrice(-item.price);
-      setExtras(extras.filter((extra) => extra.id !== item.id));
-    }
+  const handleVariant = (e, item) => {
+    changePrice(item.variant_price);
+    setVariant([...variant, item]);
   };
 
   const handleClick = () => {
@@ -46,7 +37,7 @@ const Index = ({ food }) => {
         foodQuantity: 1,
         title: food.title,
         img: food.img,
-        extras,
+        variant,
         price,
         quantity: 1,
       })
@@ -60,8 +51,8 @@ const Index = ({ food }) => {
             <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
                 <div className="relative min-h-[300px]">
                     <Image
-                      src={food?.img}
-                      alt={food?.img}
+                      src={food?.product_image}
+                      alt={food?.product_image}
                       layout="fill"
                       className="w-full relative z-10 object-cover rounded-md"
                       priority
@@ -69,72 +60,36 @@ const Index = ({ food }) => {
                 </div>
             </div>
             <div className="w-full md:w-1/2 px-10">
-                <div className="mb-10">
-                    <h1 className="font-bold uppercase text-2xl mb-4">{food.title}</h1>
-                    <p className="text-sm font-semibold">{food.desc}</p>
-                </div>
-
-                <div className="flex gap-x-4 my-6 md:justify-start justify-center">
-                  {extraItems.map((item) => (
-                    <label className="flex items-center gap-x-1" key={item._id}>
-                      <input
-                        type="checkbox"
-                        className="w-5 h-5"
-                        onChange={(e) => handleChange(e, item)}
-                      />
-                      <span className="text-sm font-semibold capitalize">{item.text}</span>
-                    </label>
-                  ))}
-                </div>
-
-                {food.category === "pizza" && (
-                  <div>
-                    <h4 className="text-xl font-bold">Choose the size</h4>
-                    <div className="flex items-center gap-x-20 md:justify-start justify-center min-h-[100px]">
-                      <div
-                        className={`relative w-8 h-8 cursor-pointer hover:h-10 hover:w-10 transition-all ${
-                          size === 0 && "border-4 border-primary rounded-full w-10 h-10"
-                        }`}
-                        onClick={() => handleSize(0)}
-                      >
-                        <Image src="/images/size.png" alt="" layout="fill" />
-                        <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
-                          Small
-                        </span>
-                      </div>
-                      <div
-                        className={`relative w-12 h-12 cursor-pointer hover:h-14 hover:w-14 transition-all ${
-                          size === 1 && "border-4 border-primary rounded-full w-16 h-16"
-                        }`}
-                        onClick={() => handleSize(1)}
-                      >
-                        <Image src="/images/size.png" alt="" layout="fill" />
-                        <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
-                          Medium
-                        </span>
-                      </div>
-                      <div
-                        className={`relative w-16 h-16 cursor-pointer hover:h-20 hover:w-20 transition-all ${
-                          size === 2 && "border-4 border-primary rounded-full w-20 h-20"
-                        } `}
-                        onClick={() => handleSize(2)}
-                      >
-                        <Image src="/images/size.png" alt="" layout="fill" />
-                        <span className="absolute top-0 -right-6 text-xs bg-primary rounded-full px-[5px] font-medium">
-                          Large
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
                 <div>
+                    <h1 className="font-bold uppercase text-2xl">{food.product_name}</h1>
                     <div className="inline-block align-bottom mr-5">
-                        <span className="text-2xl leading-none align-baseline">$</span>
-                        <span className="font-bold text-5xl leading-none align-baseline">{price}</span>
+                      <Title addClass="font-bold text-5xl leading-none align-baseline text-red-400">${price}</Title>
                     </div>
-                    <div className="inline-block align-bottom">
-                        <button className="text-white text-sm font-semibold disabled:opacity-75 bg-amber-400 py-3 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu disabled:hover:scale-100 hover:scale-110 flex items-center" onClick={handleClick} disabled={findCart}><RiShoppingCart2Fill className="mr-2 text-xl" /> ADD TO CART</button>
-                    </div>
+                </div>
+
+                {Variants.length > 0 && <p className="font-bold text-md mt-4">Select size</p>}
+                {Variants?.map((item, _idx) => (
+                  <div className="grid grid-cols-2 mt-2">
+                    <label key={_idx} className="inline-flex cursor-pointer items-center rounded-full">
+                      <div className="relative inline-flex">
+                        <input
+                          type="radio"
+                          name="variants"
+                          defaultChecked={_idx === 0}
+                          className="peer relative h-4 w-4 cursor-pointer appearance-none rounded-xl border-2 border-gray-300 transition-all checked:border-red-400 checked:bg-red-400 hover:scale-110" onChange={(e) => handleVariant(e, item)} />
+                        <div className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                          <i className="fas fa-check text-xs"></i>
+                        </div>
+                      </div>
+                      <span className='text-xs uppercase font-bold ml-2'>{item.variant_name}</span>
+                    </label>
+
+                    <span className="text-xs font-bold text-gray-400">+{item.variant_price}</span>
+                  </div>
+                ))}
+
+                <div className="inline-block align-bottom mt-10">
+                    <button className="text-white text-sm font-semibold disabled:opacity-75 bg-amber-400 py-3 px-5 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu disabled:hover:scale-100 hover:scale-110 flex items-center" onClick={handleClick} disabled={findCart}><RiShoppingCart2Fill className="mr-2 text-xl" /> ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -147,9 +102,11 @@ export const getServerSideProps = async ({ params }) => {
   const res = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`
   );
+  console.log(res.data)
   return {
     props: {
-      food: res.data ? res.data : null,
+      food: res.data.product ? res.data.product : null,
+      Variants: res.data.variants ? res.data.variants : null
     },
   };
 };

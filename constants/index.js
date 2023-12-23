@@ -1,5 +1,9 @@
 export const BASE_URL = process.env.NEXT_PUBLIC_DEV_API_URL;
 
+export const LOGIN = `${BASE_URL}/auth/login`;
+export const REGISTER = `${BASE_URL}/auth/register`;
+
+
 export const HEADERLINKS = [
     {
         "title": "Home",

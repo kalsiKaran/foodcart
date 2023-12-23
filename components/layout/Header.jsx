@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { HEADERLINKS } from "../../constants";
+import { useSession } from "next-auth/react";
 
 const Header = () => {
   const [isSearchModal, setIsSearchModal] = useState(false);

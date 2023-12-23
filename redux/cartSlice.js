@@ -22,7 +22,7 @@ const cartSlice = createSlice({
     },
     quantityIncrease: (state, action) => {
       state.products.map((item) => {
-        if (item.title === action.payload.title) {
+        if (item.product_name === action.payload.product_name) {
           state.quantity += 1;
           item.foodQuantity += 1;
           state.price += action.payload.price;
@@ -32,7 +32,7 @@ const cartSlice = createSlice({
     },
     quantityDecrease: (state, action) => {
       state.products.map((item) => {
-        if (item.title === action.payload.title) {
+        if (item.product_name === action.payload.product_name) {
           if (item.foodQuantity > 1) {
             state.quantity -= 1;
             item.foodQuantity -= 1;
@@ -40,7 +40,7 @@ const cartSlice = createSlice({
             state.total -= action.payload.price;
           } else {
             state.products = state.products.filter(
-              (item) => item.title !== action.payload.title
+              (item) => item.product_name !== action.payload.product_name
             );
             state.quantity -= 1;
             state.price -= action.payload.price;
