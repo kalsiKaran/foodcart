@@ -3189,7 +3189,7 @@ natural-compare@^1.4.0:
 negotiator@^0.6.3:
   version "0.6.3"
 
-next-auth@^4, next-auth@^4.22.3:
+next-auth@^4:
   version "4.22.3"
   resolved "https://registry.npmjs.org/next-auth/-/next-auth-4.22.3.tgz"
   integrity sha512-XAgy9xV3J2eJOXrQhmxdjV6MLM29ibm6WtMXc3KY6IPZeApf+SuBuPvlqCUfbu5YsAzlg9WSw6u01dChTfeZOA==
