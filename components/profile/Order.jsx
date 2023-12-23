@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
-
-  const { data: session } = useSession();
 
   const router = useRouter();
 
@@ -28,19 +25,19 @@ const Order = () => {
     getOrders();
   }, [currentUser]);
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-        setCurrentUser(
-          res.data.filter((user) => user.email === session.user.email)[0]
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getUsers();
-  }, [session]);
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     try {
+  //       const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
+  //       setCurrentUser(
+  //         res.data.filter((user) => user.email === session.user.email)[0]
+  //       );
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getUsers();
+  // }, [session]);
 
   return (
     <div className="lg:p-8 flex-1 lg:mt-0 mt-5">
