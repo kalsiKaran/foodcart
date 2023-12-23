@@ -121,7 +121,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
 
               { Variants.length > 0 && <p className="font-bold text-md mt-3">Select size</p> }
               {Variants?.map((item, _idx) => (
-                <div className="grid grid-cols-2 mt-2">
+                <div className="grid grid-cols-2 mt-2" key={_idx}>
                   <label key={_idx} className="inline-flex cursor-pointer items-center rounded-full">
                     <div className="relative inline-flex">
                       <input

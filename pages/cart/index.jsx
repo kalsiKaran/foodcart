@@ -101,14 +101,12 @@ const Cart = ({ userList }) => {
           {cart.products.length > 0 ? (
             <div className="w-full">
 
-              {console.log(cart)}
-
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cart.products.map((product) => (
                     <div key={product.id} className="container mx-auto p-6 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
                       <div className="h-[200px] overflow-hidden relative rounded-xl ">
                         {product.product_image ? 
-                          <Image className="h-full w-full object-cover transition duration-500 hover:scale-110" src={product.product_image} layout="fill" alt={product.product_image} />:
+                          <Image className="h-full w-full object-cover transition duration-500 hover:scale-110" src={product.product_image} layout="fill" alt={product.product_name} />:
                           <div className="animate-pulse h-full w-full">
                             <div className="h-full w-full bg-slate-200"></div>
                           </div>

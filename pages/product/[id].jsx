@@ -52,7 +52,7 @@ const Index = ({ food, Variants }) => {
                 <div className="relative min-h-[300px]">
                     <Image
                       src={food?.product_image}
-                      alt={food?.product_image}
+                      alt={food?.product_name}
                       layout="fill"
                       className="w-full relative z-10 object-cover rounded-md"
                       priority
@@ -69,7 +69,7 @@ const Index = ({ food, Variants }) => {
 
                 {Variants.length > 0 && <p className="font-bold text-md mt-4">Select size</p>}
                 {Variants?.map((item, _idx) => (
-                  <div className="grid grid-cols-2 mt-2">
+                  <div className="grid grid-cols-2 mt-2" key={_idx}>
                     <label key={_idx} className="inline-flex cursor-pointer items-center rounded-full">
                       <div className="relative inline-flex">
                         <input
