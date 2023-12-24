@@ -9,16 +9,16 @@ const handler = async (req, res) => {
     }
 
     try {
-      const response = await axios.get(USER, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+        const response = await axios.get(USER, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
       res.status(200).json(response.data);
     } catch (err) {
-    //   console.log(err);
-    //   res.status(err.response.status).json(err.data)
+      console.log(err);
+      res.status(err.response.status).json(err.data)
     }
 
 };
