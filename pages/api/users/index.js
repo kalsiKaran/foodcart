@@ -1,27 +1,26 @@
-// import User from "../../../models/User";
-// import dbConnect from "../../../util/dbConnect";
+import { USER } from "../../../constants";
+import axios from "axios";
 
-// const handler = async (req, res) => {
-//   await dbConnect();
-//   const { method } = req;
+const handler = async (req, res) => {
+    const token = req.cookies.token;
 
-//   if (method === "GET") {
-//     try {
-//       const users = await User.find();
-//       res.status(200).json(users);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
+    if (!token) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
 
-//   if (method === "POST") {
-//     try {
-//       const newUser = await User.create(req.body);
-//       res.status(200).json(newUser);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-// };
+    try {
+      const response = await axios.get(USER, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-// export default handler;
+      res.status(200).json(response.data);
+    } catch (err) {
+    //   console.log(err);
+    //   res.status(err.response.status).json(err.data)
+    }
+
+};
+
+export default handler;

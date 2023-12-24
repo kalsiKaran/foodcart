@@ -2,6 +2,13 @@ export const BASE_URL = process.env.NEXT_PUBLIC_DEV_API_URL;
 
 export const LOGIN = `${BASE_URL}/auth/login`;
 export const REGISTER = `${BASE_URL}/auth/register`;
+export const USER = `${BASE_URL}/auth/user`;
+export const LOGOUT = `${BASE_URL}/auth/logout`;
+
+export const CATEGORIES = `${BASE_URL}/menu`;
+
+export const SINGLE_PRODUCT = `${BASE_URL}/product`;
+export const PRODUCTS = `${BASE_URL}/products`;
 
 
 export const HEADERLINKS = [

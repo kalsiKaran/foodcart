@@ -7,8 +7,6 @@ import axios from "axios";
 import Title from "../../components/ui/Title";
 
 const Index = ({ food, Variants }) => {
-  console.log(food, Variants)
-
   const [prices, setPrices] = useState(food.selling_price);
   const [price, setPrice] = useState(prices);
   const [size, setSize] = useState(0);
@@ -75,7 +73,7 @@ const Index = ({ food, Variants }) => {
                         <input
                           type="radio"
                           name="variants"
-                          defaultChecked={_idx === 0}
+                          defaultChecked={item.variant_price === price}
                           className="peer relative h-4 w-4 cursor-pointer appearance-none rounded-xl border-2 border-gray-300 transition-all checked:border-red-400 checked:bg-red-400 hover:scale-110" onChange={(e) => handleVariant(e, item)} />
                         <div className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
                           <i className="fas fa-check text-xs"></i>

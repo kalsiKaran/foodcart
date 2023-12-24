@@ -1,16 +1,23 @@
 import axios from "axios";
-import { BASE_URL } from "../../../constants";
+import { LOGIN } from "../../../constants";
+import { serialize } from 'cookie';
 
 const handler = async (req, res) => {
   const User = req.body;
 
   try {
-    const response = await axios.post(`${BASE_URL}/auth/login`, User)
+    const response = await axios.post(LOGIN, User)
     
     if (response.status === 200) {
       const token = response.data.accessToken;
-      res.setHeader('Set-Cookie', `token=${token}; Path=/; HttpOnly; SameSite=Strict`);
 
+      const setToken = serialize('token', token, {
+        path: '/',
+        httpOnly: true,
+        sameSite: 'strict',
+      });
+
+      res.setHeader('Set-Cookie', setToken);
       res.status(200).json(response.data);
     } else {
       res.status(response.status).json(response.data);

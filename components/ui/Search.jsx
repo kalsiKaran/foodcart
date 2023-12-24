@@ -36,7 +36,7 @@ const Search = ({ setIsSearchModal }) => {
   const handleSearch = async (e) => {
     setSearch(e.target.value);
     const searchFilter = product.filter((item) =>
-      item.title.toLowerCase().includes(e.target.value.toLowerCase())
+      item.product_name.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFiltered(searchFilter);
   };
@@ -57,24 +57,26 @@ const Search = ({ setIsSearchModal }) => {
                 {filtered.length > 0 ? (
                   filtered.slice(0, 5).map((item) => (
                     <li
-                      className="flex items-center justify-between p-1 hover:bg-primary transition-all px-3 cursor-pointer"
-                      key={item._id}
+                      className="flex items-center justify-between p-1 hover:bg-amber-100 rounded-md transition-all px-3 cursor-pointer"
+                      key={item.id}
                       onClick={() => {
-                        router.push(`/product/${item?._id}`);
+                        router.push(`/product/${item?.id}`);
                         setIsSearchModal(false);
                       }}
                     >
                       <div className="relative flex">
                         <Image
-                          src={item?.img}
-                          alt={item.title}
+                          src={item?.product_image}
+                          alt={item.product_name}
                           width={48}
                           height={48}
                           priority
+                          objectFit="cover"
+                          className="rounded-md"
                         />
                       </div>
-                      <span className="font-bold">{item.title}</span>
-                      <span className="font-bold">${item.prices[0]}</span>
+                      <span className="font-bold grow ml-5">{item.product_name}</span>
+                      <span className="font-bold">${item.selling_price}</span>
                     </li>
                   ))
                 ) : (

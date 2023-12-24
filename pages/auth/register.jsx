@@ -6,8 +6,11 @@ import Title from "../../components/ui/Title";
 import { registerSchema } from "../../schema/register";
 import { toast } from "react-toastify";
 import { login } from "../../components/Login";
+import { useRouter } from "next/router";
 
 const Register = () => {
+  const router = useRouter();
+
   const onSubmit = async (values, actions) => {
     try {
       const res = await axios.post(
@@ -15,10 +18,8 @@ const Register = () => {
         values
       );
       if (res.status === 201) {
-        toast.success("User created successfully");
-        
         const { phone, password } = values;
-        login(phone, password);
+        login(phone, password, router);
       }
     } catch (err) {
       toast.error(err.response.data.message);
@@ -113,12 +114,11 @@ const Register = () => {
 export async function getServerSideProps(context) {
   const { req } = context;
   const token = req.cookies.token || '';
-  console.log(req.url)
 
   if(token){
     return{
       redirect: {
-        destination: '/menu',
+        destination: '/profile',
         permanent: false
       }
     }

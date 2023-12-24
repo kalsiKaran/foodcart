@@ -1,11 +1,11 @@
 import axios from "axios";
-import { BASE_URL } from "../../../constants";
+import { REGISTER } from "../../../constants";
 
 const handler = async (req, res) => {
   const User = req.body;
 
   try {
-    const response = await axios.post(`${BASE_URL}/auth/register`, User);
+    const response = await axios.post(REGISTER, User);
 
     if (response.status === 201) {
       res.status(201).json(response.data);

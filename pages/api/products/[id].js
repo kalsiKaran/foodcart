@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../constants";
+import { SINGLE_PRODUCT } from "../../../constants";
 import axios from "axios";
 
 const handler = async (req, res) => {
@@ -13,7 +13,7 @@ const handler = async (req, res) => {
       }
       console.log(query)
 
-      const product = await axios.get(`${BASE_URL}/product/${productId}`);
+      const product = await axios.get(`${SINGLE_PRODUCT}/${productId}`);
       
       res.status(200).json(product.data);
     } else {

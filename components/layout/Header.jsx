@@ -81,23 +81,11 @@ const Header = () => {
           </Link>
 
           <Link href="/auth/login">
-            <span>
-              {router.asPath.includes("auth") ? (
-                <i
-                  className={`fa-solid fa-right-to-bracket ${
-                    router.asPath.includes("login") && "text-primary"
-                  } `}
-                ></i>
-              ) : (
-                <FaUserAlt
-                  className={`hover:text-primary transition-all cursor-pointer text-xl ${
-                    (router.asPath.includes("auth") ||
-                      router.asPath.includes("profile")) &&
-                    "text-primary"
-                  }`}
-                />
-              )}
-            </span>
+            <FaUserAlt
+              className={`hover:text-primary transition-all cursor-pointer text-xl ${(router.asPath.includes("auth") ||
+              router.asPath.includes("profile")) &&
+            "text-primary"}`}
+            />
           </Link>
           <button
             className="sm:hidden inline-block"

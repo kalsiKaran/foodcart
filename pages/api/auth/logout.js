@@ -1,5 +1,6 @@
-import { BASE_URL } from "../../../constants";
+import { LOGOUT } from "../../../constants";
 import axios from "axios";
+import { serialize } from "cookie";
 
 const handler = async (req, res) => {
     const token = req.cookies.token;
@@ -8,14 +9,21 @@ const handler = async (req, res) => {
         return res.status(401).json({ message: "Unauthorized" });
     }
 
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
-
     try {
-      const response = await axios.get(`${BASE_URL}/auth/logout`, config);
+      const response = await axios.get(LOGOUT, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const clearToken = serialize('token', token, {
+        path: '/',
+        httpOnly: true,
+        sameSite: 'strict',
+        expires: new Date(0)
+      });
+
+      res.setHeader('Set-Cookie', clearToken);
       res.status(200).json(response.data);
     } catch (err) {
       console.log(err);

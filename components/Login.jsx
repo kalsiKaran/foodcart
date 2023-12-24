@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import axios from 'axios';
 
-export const login = async (phone, password) => {
+export const login = async (phone, password, router) => {
   try {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       phone: phone,
@@ -13,6 +13,7 @@ export const login = async (phone, password) => {
         position: 'bottom-left',
         theme: 'colored',
       });
+      router.push("/profile")
       return { success: true };
     } else {
         toast.error('Login failed', {

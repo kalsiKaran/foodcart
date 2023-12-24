@@ -1,18 +1,11 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
-
-import { useEffect, useState } from "react";
-import Account from "../../components/profile/Account";
-import Order from "../../components/profile/Order";
-import Password from "../../components/profile/Password";
+import Skeleton from "react-loading-skeleton";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../constants";
 
 const Profile = ({ user }) => {
-  
-  const [tabs, setTabs] = useState(0);
-  const { push } = useRouter();
+  const router = useRouter();
 
   const handleSignOut = async () => {
     
@@ -21,11 +14,12 @@ const Profile = ({ user }) => {
 
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`);
         if (res.status === 200) {
-          document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
           toast.success("Sign out successfully", {
             position: "bottom-left",
             theme: "colored",
           });
+
+          router.push("/auth/login")
         }
       } catch (err) {
         toast.error(err.response?.data?.message);
@@ -35,77 +29,65 @@ const Profile = ({ user }) => {
   };
 
   return (
-    <div className="flex pr-10 min-h-[calc(100vh_-_433px)] md:flex-row flex-col md:mb-0 mb-10">
-      <div className="lg:w-80 w-100 flex-shrink-0 lg:h-[80vh] justify-center flex flex-col shadow-2xl">
-        <div className="relative flex flex-col items-center px-10 py-5 border border-b-0 ">
-          <Image
-            src={user?.image ? user?.image : "/images/client2.jpg"}
-            alt=""
-            width={100}
-            height={100}
-            className="rounded-full"
-          />
-          <b className="text-2xl mt-1">{user.fullName}</b>
-        </div>
-        <ul className="text-center font-semibold">
-          <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
-              tabs === 0 && "bg-primary text-white"
-            }`}
-            onClick={() => setTabs(0)}
-          >
-            <i className="fa fa-home"></i>
-            <button className="ml-1 ">Account</button>
-          </li>
-          <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
-              tabs === 1 && "bg-primary text-white"
-            }`}
-            onClick={() => setTabs(1)}
-          >
-            <i className="fa fa-key"></i>
-            <button className="ml-1">Password</button>
-          </li>
-          <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
-              tabs === 2 && "bg-primary text-white"
-            }`}
-            onClick={() => setTabs(2)}
-          >
-            <i className="fa fa-motorcycle"></i>
-            <button className="ml-1">Orders</button>
-          </li>
-          <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all`}
-            onClick={handleSignOut}
-          >
-            <i className="fa fa-sign-out"></i>
-            <button className="ml-1">Logout</button>
-          </li>
-        </ul>
-      </div>
-      {/* {tabs === 0 && <Account user={user} />}
-      {tabs === 1 && <Password user={user} />}
-      {tabs === 2 && <Order />} */}
+    <div className="w-72 mx-auto border-2 my-16 rounded-xl">
+        {user ? 
+          <div className="flex flex-col items-center py-8">
+            <div className="relative overflow-hidden h-24 w-24 rounded-full ">
+              <Image src="/images/client2.jpg" alt="" className="h-full w-full" objectFit="cover" layout="fill" />
+            </div>
+            <h1 className="font-bold mt-6 text-xl">Testing name</h1>
+            <div className="grid grid-cols-2 gap-5 mt-6">
+              <button className="w-24 rounded-md bg-amber-400 py-2 px-3 font-semibold uppercase text-white hover:scale-110 transition duration-300" onClick={() => router.push('/menu')}>Order</button>
+              <button className="w-24 rounded-md bg-red-400 py-2 px-3 font-semibold uppercase text-white hover:scale-110 transition duration-300" onClick={handleSignOut}>Logout</button>
+            </div>
+          </div>:
+          <div className="flex flex-col items-center py-8">
+            <Skeleton height={96} width={96} circle={true} />
+            <Skeleton height={20} width={96} style={{marginTop: 20}} />
+            <div className="grid grid-cols-2 gap-5 mt-6">
+              <Skeleton height={30} width={100} />
+              <Skeleton height={30} width={100} />
+            </div>
+          </div>
+        }
     </div>
   );
 };
 
-export async function getServerSideProps({ req, params }) {
-  // const user = await axios.get(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/users/${params.id}`
-  // );
-
-  const user = {
-    image: "",
-    fullName: "Testing"
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const token = req.cookies.token || '';
+  
+  if(!token){
+    return{
+      redirect: {
+        destination: '/auth/login',
+        permanent: false
+      }
+    }
   }
 
-  return {
-    props: {
-      user: user,
-    },
-  };
+  try {
+    const userResponse = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/users`
+    );
+
+    const user = userResponse ? userResponse.data : null;
+
+    return {
+      props: {
+        user,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    return {
+      props: {
+        user: null,
+      },
+    };
+  }
+
 }
 
 export default Profile;

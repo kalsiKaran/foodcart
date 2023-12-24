@@ -4,12 +4,14 @@ import Input from "../../components/form/Input";
 import Title from "../../components/ui/Title";
 import { loginSchema } from "../../schema/login";
 import { login } from "../../components/Login";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const router = useRouter();
 
   const onSubmit = async (values) => {
     const { phone, password } = values;
-    login(phone, password);
+    login(phone, password, router);
   };
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
@@ -82,7 +84,7 @@ export async function getServerSideProps(context) {
   if(token){
     return{
       redirect: {
-        destination: '/menu',
+        destination: '/profile',
         permanent: false
       }
     }

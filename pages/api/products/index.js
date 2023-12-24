@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../../constants";
+import { PRODUCTS } from "../../../constants";
 import axios from "axios";
 
 const handler = async (req, res) => {
@@ -6,7 +6,7 @@ const handler = async (req, res) => {
 
   if (method === "GET") {
     try {
-      const products = await axios.get(`${BASE_URL}/products`);
+      const products = await axios.get(PRODUCTS);
       res.status(200).json(products.data.products);
     } catch (err) {
       console.log(err);
