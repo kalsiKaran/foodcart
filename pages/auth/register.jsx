@@ -79,9 +79,9 @@ const Register = () => {
   ];
 
   return (
-    <div className="container mx-auto">
+    <div className="w-full py-10 px-5 sm:px-10">
       <form
-        className="flex flex-col items-center my-20 md:w-1/2 w-full mx-auto"
+        className="flex flex-col items-center p-10 rounded-md border shadow-xl md:w-1/2 lg:w-1/3 w-full mx-auto bg-white"
         onSubmit={handleSubmit}
       >
         <Title addClass="text-[40px] mb-6">Register</Title>

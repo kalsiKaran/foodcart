@@ -168,15 +168,6 @@ const Cart = ({ userList }) => {
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-
-//   return {
-//     props: {
-//       userList: res.data ? res.data : [],
-//     },
-//   };
-// };
 
 export default Cart;
 
