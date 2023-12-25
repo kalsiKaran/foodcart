@@ -13,6 +13,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { makePayment } from "../../components/payment";
 import { PAYMENTMETHOD } from "../../constants";
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 
 const Cart = ({ loggedIn }) => {
 
@@ -129,7 +130,8 @@ const Cart = ({ loggedIn }) => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center h-full">
+            <div className="flex flex-col items-center justify-center">
+              <MdOutlineRemoveShoppingCart size={64} className="text-red-400" />
               <h1 className="text-2xl font-semibold">Your cart is empty</h1>
               <button
                 className="btn-primary mt-4"
