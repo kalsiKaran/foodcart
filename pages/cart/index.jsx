@@ -133,7 +133,7 @@ const Cart = ({ loggedIn }) => {
             <div className="flex flex-col items-center justify-center p-20">
               <TbShoppingCartX size={72} />
               <h1 className="text-2xl font-semibold mt-6">Your cart is empty</h1>
-              <h1 className="text-md font-regular text-slate-400 mt-2 text-center">Looks like you haven't made your choice yet..</h1>
+              <h1 className="text-md font-regular text-slate-400 mt-2 text-center">Looks like you haven&apos;t made your choice yet..</h1>
               <button
                 className="btn-primary mt-8"
                 onClick={() => router.push("/menu")}
