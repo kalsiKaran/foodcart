@@ -48,7 +48,7 @@ const settings = {
 
 const Campaigns = ({ categoryList }) => {
   return (
-    <div className="container mx-auto -mt-[84px] mb-10 bg-gray-50 relative p-5 rounded-lg shadow-2xl z-10">
+    <div className="container mx-auto -mt-[140px] md:-mt-[84px] mb-10 bg-gray-50 relative p-5 rounded-lg shadow-2xl z-10">
       <Slider {...settings}>
         {categoryList && categoryList.map(((category, _idx) => (
           <CampaignItem key={_idx} category={category} />

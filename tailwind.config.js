@@ -23,9 +23,9 @@ module.exports = {
         success: "#00ff00",
       },
       fontFamily: {
-        dancing: ["Dancing Script", "cursive"],
+        bubblegum: ["Bubblegum Sans", "sans-serif"],
         sans: ["Open Sans", "sans-serif"],
-        cursive: ["cursive", "sans-serif"],
+        cursive: ["cursive", "Open Sans"],
       },
     },
   },
