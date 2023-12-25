@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { FaUserAlt, FaShoppingCart, FaSearch } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
+import { IoCartOutline } from "react-icons/io5";
+import { IoIosSearch } from "react-icons/io";
+
 import Logo from "../ui/Logo";
 import Search from "../ui/Search";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
@@ -67,21 +70,21 @@ const Header = () => {
         </nav>
         <div className="flex gap-x-4 items-center">
           <button onClick={() => setIsSearchModal(true)}>
-            <FaSearch className="hover:text-primary transition-all cursor-pointer text-xl" />
+            <IoIosSearch className="hover:text-primary transition-all cursor-pointer text-2xl" />
           </button>
           <Link href="/cart">
-            <span className="relative">
-              <FaShoppingCart
-                className={`hover:text-primary transition-all cursor-pointer text-xl`}
+            <span className="relative mr-1">
+              <IoCartOutline
+                className={`hover:text-primary transition-all cursor-pointer text-2xl`}
               />
-              <span className="w-4 h-4 text-xs grid place-content-center rounded-full bg-primary absolute -top-2 -right-3 text-black font-bold">
+              <span className="w-4 h-4 text-xs grid place-content-center rounded-full bg-primary absolute -top-2 -right-2 text-black font-bold">
                 {cart.products.length === 0 ? "0" : cart.products.length}
               </span>
             </span>
           </Link>
 
           <Link href="/auth/login">
-            <FaUserAlt
+            <FaRegUser
               className={`hover:text-primary transition-all cursor-pointer text-xl ${(router.asPath.includes("auth") ||
               router.asPath.includes("profile")) &&
             "text-primary"}`}

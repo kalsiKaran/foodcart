@@ -8,6 +8,7 @@ import Link from "next/link";
 import { addProduct } from "../../redux/cartSlice";
 import { useEffect } from "react";
 import axios from "axios";
+import { RiShoppingCart2Fill } from "react-icons/ri";
 
 import Skeleton from "react-loading-skeleton";
 
@@ -167,7 +168,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
                     <h6 className="font-bold mx-3 text-xl">${TotalPrice}</h6>
                 </div>
 
-                  <button className="mt-8 text-white text-sm font-semibold bg-amber-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 disabled:hover:scale-100 disabled:opacity-60 disabled:shadow-none" disabled={findCart} onClick={addToCart}>ADD TO CART</button>
+                  <button className="mt-8 text-white text-sm font-semibold bg-amber-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 disabled:hover:scale-100 disabled:opacity-60 disabled:shadow-none flex items-center" disabled={findCart} onClick={addToCart}><RiShoppingCart2Fill className="mr-2 text-xl" /> {!findCart ? "ADD TO CART" : "IN CART"}</button>
               </div>
                 }
             </div>

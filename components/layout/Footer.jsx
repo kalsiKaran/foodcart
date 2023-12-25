@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Title from "../ui/Title";
 import { FOOTER } from '../../constants';
 
@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <div className="bg-secondary text-white">
       <div className="container mx-auto pt-16 pb-6">
-        <div className="flex md:justify-between justify-center text-center flex-wrap md:gap-y-0 gap-y-6 ">
+        <div className="flex flex-col md:flex-row md:justify-between justify-center text-center md:gap-y-0 gap-y-6 ">
           <div className="md:flex-1">
             <Title addClass="text-[30px]">Contact Us</Title>
             <div className="flex flex-col gap-y-2 mt-3">

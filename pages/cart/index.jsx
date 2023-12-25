@@ -13,7 +13,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { makePayment } from "../../components/payment";
 import { PAYMENTMETHOD } from "../../constants";
-import { MdOutlineRemoveShoppingCart } from "react-icons/md";
+import { TbShoppingCartX } from "react-icons/tb";
 
 const Cart = ({ loggedIn }) => {
 
@@ -97,9 +97,9 @@ const Cart = ({ loggedIn }) => {
     <div className="min-h-[calc(100vh_-_433px)] bg-slate-100">
       <div className="flex justify-between md:flex-row flex-col">
         <div className="md:min-h-[calc(100vh_-_433px)] p-2 md:p-4 w-full">
-          <Title addClass="text-[40px] text-center mb-4">Cart</Title>
           {cart.products.length > 0 ? (
             <div className="w-full">
+              <Title addClass="text-[40px] text-center mb-4 mt-5">Cart</Title>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cart.products.map((product) => (
@@ -130,11 +130,12 @@ const Cart = ({ loggedIn }) => {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center">
-              <MdOutlineRemoveShoppingCart size={64} className="text-red-400" />
-              <h1 className="text-2xl font-semibold">Your cart is empty</h1>
+            <div className="flex flex-col items-center justify-center p-20">
+              <TbShoppingCartX size={72} />
+              <h1 className="text-2xl font-semibold mt-6">Your cart is empty</h1>
+              <h1 className="text-md font-regular text-slate-400 mt-2 text-center">Looks like you haven't made your choice yet..</h1>
               <button
-                className="btn-primary mt-4"
+                className="btn-primary mt-8"
                 onClick={() => router.push("/menu")}
               >
                 Go to menu
