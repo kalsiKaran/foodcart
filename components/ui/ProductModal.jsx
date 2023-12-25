@@ -15,6 +15,8 @@ const ProductModal = ({ setIsProductModal, productId}) => {
 
   const [Product, setProduct] = useState([]);
   const [Variants, setVariants] = useState([]);
+  const [variant, setVariant] = useState({});
+
   const [Loading, setLoading] = useState(true);
 
   const [TotalPrice, setTotalPrice] = useState(0);
@@ -42,6 +44,10 @@ const ProductModal = ({ setIsProductModal, productId}) => {
     fetchProductDetails();
   }, [productId]);
 
+  useEffect(() => {
+    const selectedVariant = Variants.find((item) => item.variant_price === TotalPrice);
+    setVariant(selectedVariant || "")
+  }, [Variants]);
 
   const cart = useSelector((state) => state.cart);
 
@@ -49,7 +55,6 @@ const ProductModal = ({ setIsProductModal, productId}) => {
   const findCart = cart.products.find((item) => item.id === Product.id);
 
   const [foodQuantity, setFoodQuantity] = useState(1);
-  const [variant, setVariant] = useState([]);
   
   const quantityChange = (type, price) => {
     if (type === 0) {
@@ -69,18 +74,18 @@ const ProductModal = ({ setIsProductModal, productId}) => {
 
   const handleVariant = (e, item) => {
     changePrice(item.variant_price);
-    setVariant([...variant, item]);
+    setVariant(item);
   };
 
   const addToCart = () => {
     dispatch(
       addProduct({
         ...Product,
-        variant,
-        price: Price,
-        totalPrice: TotalPrice,
         quantity: 1,
         foodQuantity,
+        price: Price,
+        totalPrice: TotalPrice,
+        variant: variant?.variant_name
       })
     );
     setIsProductModal(false);

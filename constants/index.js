@@ -4,12 +4,28 @@ export const LOGIN = `${BASE_URL}/auth/login`;
 export const REGISTER = `${BASE_URL}/auth/register`;
 export const USER = `${BASE_URL}/auth/user`;
 export const LOGOUT = `${BASE_URL}/auth/logout`;
+export const CREATEORDER = `${BASE_URL}/auth/addorder`;
 
 export const CATEGORIES = `${BASE_URL}/menu`;
 
 export const SINGLE_PRODUCT = `${BASE_URL}/product`;
 export const PRODUCTS = `${BASE_URL}/products`;
 
+
+import { BsCashStack } from "react-icons/bs";
+// import { CgPaypal } from "react-icons/cg";
+export const PAYMENTMETHOD = [
+    {
+        title: "Pay in cash",
+        value: "HandCash",
+        icon: <BsCashStack size={24} color="darkgoldenrod" />
+    },
+    // {
+    //     title: "upi",
+    //     value: "UPI",
+    //     icon: <CgPaypal size={24} color="dodgerblue" />
+    // }
+]
 
 export const HEADERLINKS = [
     {

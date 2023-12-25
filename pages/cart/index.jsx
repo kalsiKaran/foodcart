@@ -12,8 +12,9 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { makePayment } from "../../components/payment";
+import { PAYMENTMETHOD } from "../../constants";
 
-const Cart = ({ userList }) => {
+const Cart = ({ loggedIn }) => {
 
   const cart = useSelector((state) => state.cart);
 
@@ -21,9 +22,7 @@ const Cart = ({ userList }) => {
 
   const dispatch = useDispatch();
 
-  // const user = userList?.find((user) => user.email === session?.user?.email);
-  const user = null;
-
+  const [paymentType, setPaymentType] = useState("HandCash");
   const [productState, setProductState] = useState([]);
   const [tableId, setTableId] = useState(null);
   
@@ -33,56 +32,56 @@ const Cart = ({ userList }) => {
   }, []);
 
 
-  // const newOrder = {
-  //   customer: user?.fullName,
-  //   address: user?.address ? user?.address : "No address",
-  //   price: cart.price,
-  //   total: cart.total,
-  //   products: productState,
-  //   method: 0,
-  //   tableId: tableId || null
-  // };
+  const newOrder = {
+    table_no: tableId || null,
+    payment_type: paymentType,
+    total: cart.total,
+    sub_total: cart.total,
+    products: productState,
+  };
 
   useEffect(() => {
     const productTitles = cart.products.map((product) => {
       return {
-        title: product.title,
-        foodQuantity: product.foodQuantity,
-        variant: product.variant,
+        id: product.id,
+        qty: product.foodQuantity,
+        price: product.price,
+        subtotal: product.totalPrice,
+        variant: product.variant || ""
       };
     });
     setProductState(productTitles);
   }, [cart.products]);
 
-
+  
   const handlePayment = () => {
     makePayment();
   }
 
-  // const createOrder = async () => {
-  //   try {
-  //     if (tableId) {
-  //       if (confirm("Are you sure you want to create this order?")) {
-  //         const res = await axios.post(
-  //           `${process.env.NEXT_PUBLIC_API_URL}/orders`,
-  //           newOrder
-  //         );
+  const createOrder = async () => {
+    try {
+      if (loggedIn) {
+        if (confirm("Are you sure you want to create this order?")) {
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/orders`,
+            newOrder
+          );
 
-  //         if (res.status === 201) {
-  //           router.push(`/order/${res.data._id}`);
-  //           dispatch(reset());
-  //           toast.success("Order created successfully");
-  //         }
-  //       }
-  //     } else {
-  //       router.push("/auth/login");
-  //       throw new Error("You must be logged in to create an order");
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.message);
-  //     console.log(error);
-  //   }
-  // };
+          if (res.status === 200) {
+            dispatch(reset());
+            toast.success("Order created successfully");
+            router.push("/thankyou");
+          }
+        }
+      } else {
+        router.push("/auth/login");
+        throw new Error("You must be logged in to create an order");
+      }
+    } catch (error) {
+      toast.error("Something went wrong.");
+      console.log(error.response.data?.message);
+    }
+  };
 
   const quantityChange = (type, price) => {
     if (type === 0) {
@@ -94,16 +93,16 @@ const Cart = ({ userList }) => {
   };
 
   return (
-    <div className="min-h-[calc(100vh_-_433px)]">
+    <div className="min-h-[calc(100vh_-_433px)] bg-slate-100">
       <div className="flex justify-between md:flex-row flex-col">
-        <div className="md:min-h-[calc(100vh_-_433px)] p-10 w-full">
-          <Title addClass="text-[40px] text-center">Cart</Title>
+        <div className="md:min-h-[calc(100vh_-_433px)] p-2 md:p-4 w-full">
+          <Title addClass="text-[40px] text-center mb-4">Cart</Title>
           {cart.products.length > 0 ? (
             <div className="w-full">
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cart.products.map((product) => (
-                    <div key={product.id} className="container mx-auto p-6 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300">
+                    <div key={product.id} className="container mx-auto p-6 bg-white max-w-sm rounded-2xl overflow-hidden hover:shadow-xl transition duration-300">
                       <div className="h-[200px] overflow-hidden relative rounded-xl ">
                         {product.product_image ? 
                           <Image className="h-full w-full object-cover transition duration-500 hover:scale-110" src={product.product_image} layout="fill" alt={product.product_name} />:
@@ -143,12 +142,26 @@ const Cart = ({ userList }) => {
         </div>
 
         {cart.products.length > 0 &&
-          <div className="bg-neutral-50 min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col justify-center p-8 lg:w-auto md:w-[280px] w-full md:text-start sticky top-0">
-            <Title addClass="text-[32px] whitespace-nowrap">CART TOTAL</Title>
+          <div className="min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col mt-0 md:mt-5 py-8 px-4 md:w-[400px] w-full md:text-start sticky top-0">
+            <h6 className="text-xl whitespace-nowrap font-bold mb-3">Payment Method</h6>
 
-            <div className="mt-2">
+            <div className="bg-white p-5 pb-2 rounded-md">
+
+              {PAYMENTMETHOD.map((payment)=>(
+                <label className="mb-3 group block" key={payment.value}>
+                  <input type="radio" name="payment" value={payment.value} className="hidden peer appearance-none" checked={payment.value === paymentType} onChange={() => setPaymentType(payment.value)} />
+                  <div className="flex items-center rounded-md p-4 border-2 peer-checked:border-amber-400 cursor-pointer">
+                    <span className="group-hover:scale-110 transition duration-300">{payment.icon}</span>
+                    <h1 className="font-bold uppercase ml-3">{payment.title}</h1>
+                  </div>
+                </label>
+              ))}
+            </div>
+
+            <h6 className="text-xl whitespace-nowrap font-bold mb-3 mt-5">Order Summary</h6>
+            <div className="bg-white py-5 px-4 rounded-md">
               
-              <p className="mt-4 font-bold text-gray-500 flex justify-between">Subtotal: <span className="text-gray-900 font-bold">${cart.total}</span></p>
+              <p className="font-bold text-gray-500 flex justify-between">Subtotal: <span className="text-gray-900 font-bold">${cart.total}</span></p>
               <p className="mt-4 font-bold text-gray-500 flex justify-between">Discount: <span className="text-gray-900 font-bold">$0.00</span></p>
               <p className="mt-4 font-bold text-gray-500 flex justify-between">Total: <span className="text-gray-900 font-bold">${cart.total}</span></p>
             </div>
@@ -156,7 +169,7 @@ const Cart = ({ userList }) => {
             <div>
               <button
                 className="w-full text-white text-md font-semibold bg-amber-400 mt-8 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 whitespace-nowrap"
-                onClick={handlePayment}
+                onClick={createOrder}
               >
                 CHECKOUT NOW!
               </button>
@@ -168,9 +181,15 @@ const Cart = ({ userList }) => {
   );
 };
 
+export const getServerSideProps = async (context) => {
+  const { req } = context;
+  const token = req.cookies.token || null;
+
+  return {
+    props: {
+      loggedIn: token ? true : false
+    },
+  };
+};
 
 export default Cart;
-
-{
-  /* */
-}

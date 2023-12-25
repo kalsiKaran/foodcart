@@ -25,20 +25,6 @@ const Order = () => {
     getOrders();
   }, [currentUser]);
 
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     try {
-  //       const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
-  //       setCurrentUser(
-  //         res.data.filter((user) => user.email === session.user.email)[0]
-  //       );
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   getUsers();
-  // }, [session]);
-
   return (
     <div className="lg:p-8 flex-1 lg:mt-0 mt-5">
       <Title addClass="text-[40px]">Password</Title>

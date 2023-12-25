@@ -1,13 +1,9 @@
 import Head from "next/head";
-import Input from "../components/form/Input";
-import Footer from "../components/layout/Footer";
-import Header from "../components/layout/Header";
 import Home from "./home";
-import axios from "axios";
 
-export default function Index({ categoryList, productList }) {
+export default function Index() {
   return (
-    <div className="">
+    <div>
       <Head>
         <title>Foodhub</title>
         <link rel="icon" href="/favicon.ico" />
@@ -18,20 +14,17 @@ export default function Index({ categoryList, productList }) {
           crossOrigin="true"
         />
       </Head>
-      <Home categoryList={categoryList} productList={productList} />
+      <Home />
     </div>
   );
 }
+  
+  export async function getServerSideProps() {
+    return{
+      redirect: {
+        destination: '/home',
+        permanent: false
+      }
+    }
+  }
 
-export const getServerSideProps = async () => {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
-  const product = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/products`
-  );
-  return {
-    props: {
-      categoryList: res.data ? res.data : [],
-      productList: product.data ? product.data : [],
-    },
-  };
-};

@@ -37,7 +37,7 @@ const Header = () => {
   return (
     <div
       className={`h-[5.5rem] z-50 w-full ${
-        isScrolled || router.asPath !== "/" ?  "bg-secondary sticky top-0" : "relative bg-transparent"
+        isScrolled || router.asPath !== "/home" ?  "bg-secondary sticky top-0" : "relative bg-transparent"
       }`}
     >
       <div className="container mx-auto text-white flex justify-between items-center h-full">

@@ -11,7 +11,6 @@ const handler = async (req, res) => {
       if (!productId) {
         return res.status(400).json({ message: 'Product ID is required' });
       }
-      console.log(query)
 
       const product = await axios.get(`${SINGLE_PRODUCT}/${productId}`);
       

@@ -9,7 +9,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
 
   useEffect(() => {
     setFilter(
-      productList.filter(
+      productList?.filter(
         (product) =>
           product.category_id ==
           categoryList[active].id
@@ -40,12 +40,12 @@ const MenuWrapper = ({ categoryList, productList }) => {
         </div>
       </div>
       <div className="mt-8 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 min-h-[380px]">
-        {filter.length > 0 &&
+        {filter?.length > 0 &&
           filter
             .slice(0, productLimit)
             .map((product) => <MenuItem key={product.id} product={product} />)}
       </div>
-      {productLimit < filter.length &&
+      {productLimit < filter?.length &&
         <div className="flex items-center justify-center my-8">
           <button
             className="btn-primary"

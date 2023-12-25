@@ -9,8 +9,6 @@ import Title from "../../components/ui/Title";
 const Index = ({ food, Variants }) => {
   const [prices, setPrices] = useState(food.selling_price);
   const [price, setPrice] = useState(prices);
-  const [size, setSize] = useState(0);
-  const [extraItems, setExtraItems] = useState(food?.extraOptions);
   const [variant, setVariant] = useState([]);
   const cart = useSelector((state) => state.cart);
 
@@ -100,7 +98,6 @@ export const getServerSideProps = async ({ params }) => {
   const res = await axios.get(
     `${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}`
   );
-  console.log(res.data)
   return {
     props: {
       food: res.data.product ? res.data.product : null,
