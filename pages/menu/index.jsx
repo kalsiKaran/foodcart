@@ -14,7 +14,7 @@ const Index = ({ categoryList, productList }) => {
   }, [router.query]);
 
   return (
-    <div className="pt-10">
+    <div className="md:pt-10 bg-slate-50">
       <MenuWrapper categoryList={categoryList} productList={productList} />
     </div>
   );

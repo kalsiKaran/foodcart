@@ -59,8 +59,8 @@ const Cart = ({ loggedIn }) => {
   }
 
   const createOrder = async () => {
+    if (loggedIn) {
     try {
-      if (loggedIn) {
         if (confirm("Are you sure you want to create this order?")) {
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_API_URL}/orders`,
@@ -73,13 +73,13 @@ const Cart = ({ loggedIn }) => {
             router.push("/thankyou");
           }
         }
-      } else {
-        router.push("/auth/login");
-        throw new Error("You must be logged in to create an order");
+      } catch (error) {
+        toast.error("Something went wrong.");
+        console.log(error.response?.data?.message);
       }
-    } catch (error) {
-      toast.error("Something went wrong.");
-      console.log(error.response.data?.message);
+    } else {
+      router.push("/auth/login");
+      toast.error("You must be logged in to create an order");
     }
   };
 

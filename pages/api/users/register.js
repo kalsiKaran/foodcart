@@ -12,9 +12,9 @@ const handler = async (req, res) => {
     }else{
       res.status(response.status).json(response.data);
     }
-  } catch (err) {
-    console.log('error', err);
-    res.status(500).json({ message: err });
+  } catch (error) {
+    console.log('error', error);
+    res.status(500).json({ message: error.response.data.message });
   }
 
 };

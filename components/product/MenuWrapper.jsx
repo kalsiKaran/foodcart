@@ -18,7 +18,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
   }, [categoryList, active, productList]);
 
   return (
-    <div className="container mx-auto  mb-16 mt-20">
+    <div className="container mx-auto pb-16 mt-5">
       <div className="flex flex-col items-center w-full">
         <Title addClass="text-[40px]">Our Menu</Title>
         <div className="mt-5">
@@ -39,7 +39,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
             ))}
         </div>
       </div>
-      <div className="mt-8 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 min-h-[380px]">
+      <div className="px-3 md:px-0 mt-8 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 min-h-[380px]">
         {filter?.length > 0 &&
           filter
             .slice(0, productLimit)

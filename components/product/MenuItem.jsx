@@ -9,7 +9,7 @@ const MenuItem = ({ product }) => {
   const [isProductModal, setIsProductModal] = useState(false);
 
   return (
-    <div className="container mx-auto p-6 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
+    <div className="container mx-auto p-3 md:p-6 bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition duration-300 flex flex-col">
       <div className="h-[200px] overflow-hidden rounded-2xl">
         <Link href={`/product/${product.id}`}>
           <div className="relative w-full h-full hover:scale-110 transition-all">

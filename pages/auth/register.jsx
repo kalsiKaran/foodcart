@@ -23,7 +23,6 @@ const Register = () => {
       }
     } catch (err) {
       toast.error(err.response.data.message);
-      console.log(err);
     }
     actions.resetForm();
   };
