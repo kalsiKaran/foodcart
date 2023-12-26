@@ -68,7 +68,7 @@ const Login = () => {
           </button>
           <div className="flex items-center">
             <span className="text-sm text-gray-400">
-              Don't have an account?
+              Don&apos;t have an account?
             </span>
             <Link href="/auth/register">
               <span className="text-sm cursor-pointer hover:underline text-primary ml-2">Sign Up!</span>
