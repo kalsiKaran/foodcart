@@ -48,7 +48,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="w-72 mx-auto border-2 my-16 rounded-xl">
+    <div className="w-72 mx-auto border-2 mt-32 sm:mt-16 mb-16 rounded-xl">
         {user ? 
           <div className="flex flex-col items-center py-8">
             <div className="relative overflow-hidden h-24 w-24 rounded-full ">

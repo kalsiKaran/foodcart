@@ -4,7 +4,7 @@ import Slider from "react-slick";
 
 const Carousel = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -12,14 +12,6 @@ const Carousel = () => {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 30000,
-    appenDots: (dots) => (
-      <div>
-        <ul>{dots}</ul>
-      </div>
-    ),
-    customPaging: (i) => (
-      <div className="w-3 h-3 border bg-white rounded-full mt-10"></div>
-    ),
   };
 
   return (

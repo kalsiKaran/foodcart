@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <div
-      className={`h-[4.5rem] sm:h-[5.5rem] z-50 w-full ${
+      className={`h-[4.5rem] sm:h-[5.5rem] mb-[72px] sm:mb-0 z-50 w-full ${
         isScrolled || router.asPath !== "/home" ?  "bg-secondary sticky top-0" : "relative bg-transparent"
       }`}
     >

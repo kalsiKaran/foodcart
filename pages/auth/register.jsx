@@ -98,11 +98,14 @@ const Register = () => {
           <button className="btn-primary" type="submit">
             REGISTER
           </button>
-          <Link href="/auth/login">
-            <span className="text-sm underline cursor-pointer text-secondary">
-              Do you have a account?
+          <div className="flex items-center">
+            <span className="text-sm text-gray-400">
+              Already have an account?
             </span>
-          </Link>
+            <Link href="/auth/login">
+              <span className="text-sm cursor-pointer hover:underline text-primary ml-2">Sign In!</span>
+            </Link>
+          </div>
         </div>
       </form>
     </div>

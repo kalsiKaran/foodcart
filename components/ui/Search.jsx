@@ -39,7 +39,7 @@ const Search = ({ setIsSearchModal }) => {
   };
 
   return (
-    <div className="bg-white sm:bg-transparent fixed top-[4.5rem] sm:top-0 left-0 w-full py-3 sm:py-0 px-2 sm:px-0 sm:relative">
+    <div className="bg-white sm:bg-transparent fixed top-[4.5rem] sm:top-0 left-0 w-full py-3 sm:py-0 px-2 sm:px-0 sm:relative border-b sm:border-0">
       <div className="relative flex items-center justify-end text-gray-600 w-full sm:w-56 md:w-72 lg:w-96 px-4 sm:px-0">
         <IoIosSearch className="text-xl -mr-10 z-10 font-bold" />
         <input type="text" placeholder="Search..." onChange={handleSearch} className="bg-white h-12 sm:h-10 px-5 pl-12 rounded-full text-sm focus:outline-none w-full border shadow-md peer" />

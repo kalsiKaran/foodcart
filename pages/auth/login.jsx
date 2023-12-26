@@ -66,11 +66,14 @@ const Login = () => {
           <button className="btn-primary" type="submit">
             LOGIN
           </button>
-          <Link href="/auth/register">
-            <span className="text-sm underline cursor-pointer text-secondary">
-              Do you no have a account?
+          <div className="flex items-center">
+            <span className="text-sm text-gray-400">
+              Don't have an account?
             </span>
-          </Link>
+            <Link href="/auth/register">
+              <span className="text-sm cursor-pointer hover:underline text-primary ml-2">Sign Up!</span>
+            </Link>
+          </div>
         </div>
       </form>
     </div>
