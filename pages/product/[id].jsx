@@ -17,7 +17,7 @@ const Index = ({ food, Variants }) => {
   useEffect(() => {
     const selectedVariant = Variants.find((item) => item.variant_price === TotalPrice);
     setVariant(selectedVariant || "")
-  }, [Variants]);
+  }, [TotalPrice, Variants]);
 
   const findCart = cart.products.find((item) => item.id === food.id);
 

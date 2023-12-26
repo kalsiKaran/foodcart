@@ -1,10 +1,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import OutsideClickHandler from "react-outside-click-handler";
-import Title from "../ui/Title";
-import { GiCancel } from "react-icons/gi";
+import { IoIosSearch } from "react-icons/io";
 import axios from "axios";
-import Input from "../form/Input";
 import { useRouter } from "next/router";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
@@ -42,64 +39,52 @@ const Search = ({ setIsSearchModal }) => {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-screen h-screen z-50 after:content-[''] after:w-screen after:h-screen after:bg-black after:absolute after:top-0 after:left-0 after:opacity-30 backdrop-blur grid place-content-center">
-      <OutsideClickHandler onOutsideClick={() => setIsSearchModal(false)}>
-        <div className="w-full h-full grid place-content-center relative">
-          <div className="relative z-50 md:w-[600px] w-[370px] bg-white p-10 rounded-2xl">
-            <Title addClass="text-[40px] text-center">Search</Title>
-            <Input
-              type="text"
-              placeholder="Search..."
-              onChange={handleSearch}
-            />
-            {product.length > 0 ? (
-              <ul className="mt-6">
-                {filtered.length > 0 ? (
-                  filtered.slice(0, 5).map((item) => (
-                    <li
-                      className="flex items-center justify-between p-1 hover:bg-amber-100 rounded-md transition-all px-3 cursor-pointer"
-                      key={item.id}
-                      onClick={() => {
-                        router.push(`/product/${item?.id}`);
-                        setIsSearchModal(false);
-                      }}
-                    >
-                      <div className="relative flex">
-                        <Image
-                          src={item?.product_image}
-                          alt={item.product_name}
-                          width={48}
-                          height={48}
-                          priority
-                          objectFit="cover"
-                          className="rounded-md"
-                        />
-                      </div>
-                      <span className="font-bold grow ml-5">{item.product_name}</span>
-                      <span className="font-bold">${item.selling_price}</span>
-                    </li>
-                  ))
-                ) : (
-                  <span className="w-full text-center block font-bold my-6">
-                    No Products Found
-                  </span>
-                )}
-              </ul>
+    <div className="bg-white sm:bg-transparent fixed top-[4.5rem] sm:top-0 left-0 w-full py-3 sm:py-0 px-2 sm:px-0 sm:relative">
+      <div className="relative flex items-center justify-end text-gray-600 w-full sm:w-56 md:w-72 lg:w-96 px-4 sm:px-0">
+        <IoIosSearch className="text-xl -mr-10 z-10 font-bold" />
+        <input type="text" placeholder="Search..." onChange={handleSearch} className="bg-white h-12 sm:h-10 px-5 pl-12 rounded-full text-sm focus:outline-none w-full border shadow-md peer" />
+
+        {product.length > 0 ? (
+              <div className="absolute left-0 top-0 z-[-1] w-full bg-white pt-16 pb-3 px-2 rounded-t-3xl rounded-b-xl peer-focus:scale-y-100 scale-y-0 origin-top transition-all duration-200">
+                <ul className=" max-h-[15rem] overflow-auto">
+                  {filtered.length > 0 ? (
+                    filtered.slice(0, 5).map((item) => (
+                      <li
+                        className="flex items-center justify-between p-1 hover:bg-amber-100 rounded-md transition-all px-3 cursor-pointer"
+                        key={item.id}
+                        onClick={() => {
+                          router.push(`/product/${item?.id}`);
+                          setIsSearchModal(false);
+                        }}
+                      >
+                        <div className="relative flex">
+                          <Image
+                            src={item?.product_image}
+                            alt={item.product_name}
+                            width={40}
+                            height={40}
+                            priority
+                            objectFit="cover"
+                            className="rounded-md"
+                          />
+                        </div>
+                        <span className="font-bold grow ml-5">{item.product_name}</span>
+                        <span className="font-bold">${item.selling_price}</span>
+                      </li>
+                    ))
+                  ) : (
+                    <span className="w-full text-center block font-bold my-6">
+                      No Products Found
+                    </span>
+                  )}
+                </ul>
+              </div>
             ) : (
-              <div className="flex justify-center items-center my-9">
+              <div className="absolute left-0 top-0 z-[-1] w-full bg-white pt-16 pb-3 px-2 rounded-xl flex justify-center peer-focus:scale-y-100 scale-y-0 origin-top transition-all duration-200">
                 <PacmanLoader />
               </div>
             )}
-
-            <button
-              className="absolute  top-4 right-4"
-              onClick={() => setIsSearchModal(false)}
-            >
-              <GiCancel size={25} className=" transition-all" />
-            </button>
-          </div>
-        </div>
-      </OutsideClickHandler>
+      </div>
     </div>
   );
 };

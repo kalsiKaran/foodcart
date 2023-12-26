@@ -23,8 +23,8 @@ const Carousel = () => {
   };
 
   return (
-    <div className="h-[85vh] w-full container mx-auto -mt-[88px]">
-      <div className="absolute top-0 left-0 w-full h-[85%]">
+    <div className="relative h-[85vh] w-full  mx-auto sm:-mt-[88px]">
+      <div className="absolute top-0 left-0 w-full h-full">
         <div className="relative h-full w-full">
           <Image
             src="/images/hero-bg.jpg"
@@ -37,7 +37,7 @@ const Carousel = () => {
       </div>
       <Slider {...settings}>
         <div>
-          <div className="mt-36 md:mt-48  text-white flex flex-col items-start gap-y-10">
+          <div className="mt-36 mt-56 container mx-auto flex flex-col items-start gap-y-10 text-white">
             <Title addClass="text-6xl">Fast Food Restaurant</Title>
             <p className="text-sm sm:w-2/5 w-full">
               Doloremque, itaque aperiam facilis rerum, commodi, temporibus
@@ -47,7 +47,7 @@ const Carousel = () => {
           </div>
         </div>
         <div>
-          <div className="relative text-white top-48 flex flex-col items-start gap-y-10">
+          <div className="mt-36 mt-56 container mx-auto flex flex-col items-start gap-y-10 text-white">
             <Title addClass="text-6xl">Fast Food Restaurant</Title>
             <p className="text-sm sm:w-2/5 w-full">
               Doloremque, itaque aperiam facilis rerum, commodi, temporibus

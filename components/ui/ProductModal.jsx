@@ -48,7 +48,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
   useEffect(() => {
     const selectedVariant = Variants.find((item) => item.variant_price === TotalPrice);
     setVariant(selectedVariant || "")
-  }, [Variants]);
+  }, [TotalPrice, Variants]);
 
   const cart = useSelector((state) => state.cart);
 

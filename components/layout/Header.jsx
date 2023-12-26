@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { IoIosSearch } from "react-icons/io";
 
 import Logo from "../ui/Logo";
 import Search from "../ui/Search";
@@ -10,17 +9,22 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { HEADERLINKS } from "../../constants";
+import { useMediaQuery } from "@mui/material";
 
 const Header = () => {
-  const [isSearchModal, setIsSearchModal] = useState(false);
   const [isMenuModal, setIsMenuModal] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const isMobile = useMediaQuery('(max-width: 640px)');
 
   const cart = useSelector((state) => state.cart);
 
   const router = useRouter();
 
   useEffect(() => {
+    if(isMobile){
+      setIsScrolled(true);
+      return;
+    }
     const handleScroll = () => {
       const offset = window.scrollY;
       if (offset > 50) {
@@ -35,11 +39,11 @@ const Header = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div
-      className={`h-[5.5rem] z-50 w-full ${
+      className={`h-[4.5rem] sm:h-[5.5rem] z-50 w-full ${
         isScrolled || router.asPath !== "/home" ?  "bg-secondary sticky top-0" : "relative bg-transparent"
       }`}
     >
@@ -69,9 +73,7 @@ const Header = () => {
           )}
         </nav>
         <div className="flex gap-x-4 items-center">
-          <button onClick={() => setIsSearchModal(true)}>
-            <IoIosSearch className="hover:text-primary transition-all cursor-pointer text-2xl" />
-          </button>
+          <Search />
           <Link href="/cart">
             <span className="relative mr-1">
               <IoCartOutline
@@ -98,7 +100,7 @@ const Header = () => {
           </button>
         </div>
       </div>
-      {isSearchModal && <Search setIsSearchModal={setIsSearchModal} />}
+      
     </div>
   );
 };
