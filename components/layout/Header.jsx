@@ -59,7 +59,7 @@ const Header = () => {
           }`}
         >
           <Link href="/menu">
-            <div className="relative h-56 w-full rounded-xl overflow-hidden" onClick={() => setIsMenuModal(false)}>
+            <div className="relative h-48 w-full rounded-xl overflow-hidden" onClick={() => setIsMenuModal(false)}>
               <Image
                 src='/images/pizza-banner.jpg'
                 alt="pizza banner"
@@ -67,9 +67,6 @@ const Header = () => {
                 priority
                 objectFit="cover"
               />
-              <button className="absolute left-3 top-3 bg-amber-400 px-3 py-1 rounded-md text-xs font-bold opacity-90">
-                50% OFF
-              </button>
             </div>
           </Link>
           
