@@ -18,10 +18,9 @@ const Hero = () => {
       
     <Slider {...settings}>
         {[1,2].map((img, _idx)=>(
-            <Link href="/menu">
+            <Link href="/menu" key={_idx}>
                 <div className="relative h-64 sm:h-[70vh] w-full overflow-hidden">
                     <Image
-                        key={_idx}
                         src={`/images/home-banner-${img}.png`}
                         alt="home-banner"
                         layout="fill"
