@@ -12,6 +12,8 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { HEADERLINKS } from "../../constants";
 import { useMediaQuery } from "@mui/material";
+import Image from "next/image";
+
 
 const Header = () => {
   const [isMenuModal, setIsMenuModal] = useState(false);
@@ -56,8 +58,22 @@ const Header = () => {
             isMenuModal === true && "translate-x-0"
           }`}
         >
+          <Link href="/menu">
+            <div className="relative h-56 w-full rounded-xl overflow-hidden" onClick={() => setIsMenuModal(false)}>
+              <Image
+                src='/images/pizza-banner.jpg'
+                alt="pizza banner"
+                layout="fill"
+                priority
+                objectFit="cover"
+              />
+              <button className="absolute left-3 top-3 bg-amber-400 px-3 py-1 rounded-md text-xs font-bold opacity-90">
+                50% OFF
+              </button>
+            </div>
+          </Link>
           
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 mt-8">
             <Link href="/favourites">
               <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)}>
                 <AiOutlineHeart className="text-3xl text-red-400" />
@@ -73,16 +89,24 @@ const Header = () => {
             </Link>
           </div>
 
-          <Link href="/cart">
-            <div className="flex items-center p-4 mt-8 w-full bg-white rounded-lg shadow-sm" onClick={() => setIsMenuModal(false)} >
+          { false ? 
+          <Link href="/auth/login">
+            <div className="flex items-center p-4 mt-6 w-full bg-white rounded-lg shadow-sm" onClick={() => setIsMenuModal(false)} >
               <FaRegUser className="text-xl text-red-400" />
               <h6 className="ml-3 text-md text-gray-700">Login / Signup</h6>
             </div>
+          </Link>:
+          <Link href="/profile">
+            <div className="flex items-center p-4 mt-6 w-full bg-white rounded-lg shadow-sm" onClick={() => setIsMenuModal(false)} >
+              <FaRegUser className="text-xl text-red-400" />
+              <h6 className="ml-3 text-md text-gray-700">Your Profile</h6>
+            </div>
           </Link>
+          }
 
           <ul className="mt-5 rounded-lg overflow-hidden shadow-sm">
             {HEADERLINKS.map((link, _idx) => (
-              <li key={_idx} className={`bg-white border-l-4 border-l-transparent border-b border-b-gray-100 p-4 text-xs font-semibold uppercase transition-all duration-200 cursor-pointer ${ router.asPath === link.path && "border-l-4 border-l-amber-500" }`}
+              <li key={_idx} className={`bg-white border-l-4 border-l-transparent border-b border-b-gray-100 p-5 text-xs font-semibold uppercase transition-all duration-200 cursor-pointer ${ router.asPath === link.path && "border-l-4 border-l-amber-500" }`}
                 onClick={() => setIsMenuModal(false)}
               >
                 <Link href={link.path}>
