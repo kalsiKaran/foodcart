@@ -31,7 +31,7 @@ export const HEADERLINKS = [
     {
         "title": "Home",
         "icon": "fa-home",
-        "path": "/"
+        "path": "/home"
     },{
         "title": "Menu",
         "icon": "fa-th-large",

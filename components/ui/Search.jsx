@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
+import { RiSearch2Line } from "react-icons/ri";
 import axios from "axios";
 import { useRouter } from "next/router";
 import PacmanLoader from "react-spinners/PacmanLoader";
@@ -39,13 +39,15 @@ const Search = ({ setIsSearchModal }) => {
   };
 
   return (
-    <div className="bg-white sm:bg-transparent fixed top-[4.5rem] sm:top-0 left-0 w-full py-3 sm:py-0 px-2 sm:px-0 sm:relative border-b sm:border-0">
-      <div className="relative flex items-center justify-end text-gray-600 w-full sm:w-56 md:w-72 lg:w-96 px-4 sm:px-0">
-        <IoIosSearch className="text-xl -mr-10 z-10 font-bold" />
-        <input type="text" placeholder="Search..." onChange={handleSearch} className="bg-white h-12 sm:h-10 px-5 pl-12 rounded-full text-sm focus:outline-none w-full border shadow-md peer" />
+    <div className="bg-slate-50 sm:bg-transparent fixed top-[4.5rem] sm:top-0 left-0 w-full sm:w-1/2 py-3 sm:py-0 px-2 sm:px-0 sm:relative border-b sm:border-0 z-50">
+      <div className="relative flex items-center justify-end text-gray-600 w-full px-4 sm:px-0">
+        <span className="text-xl -mr-12 z-10 font-bold text-red-500 border-r-2 pr-3">
+          <RiSearch2Line />
+        </span>
+        <input type="text" placeholder="Search for a dish..." onChange={handleSearch} className="bg-white h-12 sm:h-15 px-5 pl-16 rounded-lg text-md focus:outline-none w-full border shadow-md peer" />
 
         {product.length > 0 ? (
-              <div className="absolute left-0 top-0 z-[-1] w-full bg-white pt-16 pb-3 px-2 rounded-t-3xl rounded-b-xl peer-focus:scale-y-100 scale-y-0 origin-top transition-all duration-200">
+              <div className="absolute left-0 top-0 z-[-1] w-full bg-white pt-16 pb-3 px-2 rounded-xl peer-focus:scale-y-100 scale-y-0 origin-top transition-all duration-200 shadow-xl">
                 <ul className=" max-h-[15rem] overflow-auto">
                   {filtered.length > 0 ? (
                     filtered.slice(0, 5).map((item) => (
@@ -68,8 +70,8 @@ const Search = ({ setIsSearchModal }) => {
                             className="rounded-md"
                           />
                         </div>
-                        <span className="font-bold grow ml-5">{item.product_name}</span>
-                        <span className="font-bold">${item.selling_price}</span>
+                        <span className="grow ml-5">{item.product_name}</span>
+                        <span className="font-semibold">${item.selling_price}</span>
                       </li>
                     ))
                   ) : (

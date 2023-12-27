@@ -15,7 +15,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="relative h-[85vh] w-full  mx-auto sm:-mt-[88px]">
+    <div className="relative h-[85vh] w-full  mx-auto">
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="relative h-full w-full">
           <Image

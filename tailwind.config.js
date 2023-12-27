@@ -26,6 +26,7 @@ module.exports = {
         bubblegum: ["Bubblegum Sans", "sans-serif"],
         sans: ["Open Sans", "sans-serif"],
         cursive: ["cursive", "Open Sans"],
+        inter: ["Inter", "sans-serif"]
       },
     },
   },
