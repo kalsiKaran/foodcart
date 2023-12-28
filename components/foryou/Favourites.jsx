@@ -39,7 +39,7 @@ const Favourites = ({productList}) => {
         </div>:
         <div className="flex flex-col items-center pt-10">
           <BiBookHeart className="text-6xl text-gray-400 -rotate-12" />
-          <span className="text-center my-4 text-gray-400 text-sm sm:text-lg">Seems like there's nothing in your favorites yet. <br /> Let's change that!</span>
+          <span className="text-center my-4 text-gray-400 text-sm sm:text-lg">Seems like there&apos;s nothing in your favorites yet. <br /> Let&apos;s change that!</span>
           <Link href="/menu">
               <button className="py-2 px-4 bg-amber-300 rounded-md text-sm font-semibold hover:scale-95 transition duration-400">Explore Menu</button>
           </Link>

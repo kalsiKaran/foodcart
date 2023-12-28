@@ -5,16 +5,15 @@ import Hero from "../../components/Hero";
 import Customers from "../../components/customers/Customers";
 import MenuWrapper from "../../components/product/MenuWrapper";
 import axios from "axios";
-import ForYou from "../../components/foryou";
+import Foryou from "../../components/foryou/Foryou";
 
 const Index = ({ categoryList, productList }) => {
 
   return (
     <React.Fragment>
-      {/* <Carousel /> */}
       <Hero />
       <Campaigns categoryList={categoryList} />
-      <ForYou productList={productList} />
+      <Foryou productList={productList} />
       <MenuWrapper categoryList={categoryList} productList={productList} />
       <About />
       <Customers />

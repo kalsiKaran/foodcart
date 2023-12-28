@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import Slider from "react-slick";
 import Title from "../ui/Title";
 import { RiMedal2Line } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -18,7 +15,7 @@ const TABS = [
     },
 ]
 
-const index = ({productList}) => {
+const Foryou = ({productList}) => {
     const [activeTab, setActiveTab] = useState(1);
 
   return (
@@ -38,4 +35,4 @@ const index = ({productList}) => {
   );
 };
 
-export default index;
+export default Foryou;
