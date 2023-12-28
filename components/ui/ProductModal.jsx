@@ -261,7 +261,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
                 <button className="bg-white text-sm font-semibold text-black py-1 px-3 rounded-lg shadow-md" onClick={() => quantityChange(1, Product)}><i className="fa-solid fa-plus"></i></button>
               </div>
 
-              <button className="flex items-center text-white bg-red-500 py-2 px-16 rounded-lg font-semibold disabled:opacity-60" disabled={findCart} onClick={addToCart}>{!findCart ? "Add Item" : "Added"}<span className="ml-2">${TotalPrice}</span></button>
+              <button className="flex items-center text-white bg-red-500 py-2 px-10 rounded-md font-semibold disabled:opacity-60" disabled={findCart} onClick={addToCart}>{!findCart ? "Add Item" : "Added"}<span className="ml-2">${TotalPrice}</span></button>
             </div>
           }
 
