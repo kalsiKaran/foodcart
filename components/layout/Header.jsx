@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import { IoCloseSharp } from "react-icons/io5";
-import { FaHamburger } from "react-icons/fa";
+import { CgMenuCake } from "react-icons/cg";
 import { AiOutlineHeart } from "react-icons/ai";
 
 import Logo from "../ui/Logo";
@@ -18,11 +18,17 @@ import Image from "next/image";
 const Header = () => {
   const [isMenuModal, setIsMenuModal] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [cartLength, setCartLength] = useState(0);
   const isMobile = useMediaQuery('(max-width: 640px)');
 
   const cart = useSelector((state) => state.cart);
+  const isLogin = useSelector((state) => state.auth.isLoggedIn);
 
   const router = useRouter();
+
+  useEffect(() => {
+    setCartLength(cart.products.length);
+  }, [cart]);
 
   useEffect(() => {
     if(isMobile){
@@ -64,7 +70,7 @@ const Header = () => {
                 src='/images/pizza-banner.jpg'
                 alt="pizza banner"
                 layout="fill"
-                priority
+                loading="eager"
                 objectFit="cover"
               />
             </div>
@@ -72,7 +78,7 @@ const Header = () => {
           
           <div className="grid grid-cols-2 gap-4 mt-8">
             <Link href="/favourites">
-              <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)}>
+              <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md " onClick={() => setIsMenuModal(false)}>
                 <AiOutlineHeart className="text-3xl text-red-400" />
                 <h6 className="text-md mt-2">Favourites</h6>
               </div>
@@ -117,37 +123,41 @@ const Header = () => {
           </ul>
 
         </nav>
-          <Search />
+          <Search setIsMenuModal={setIsMenuModal} />
         <div className="flex gap-x-4 items-center z-50">
-          <Link href="/cart">
-            <span className="relative mr-1 hidden sm:flex items-center bg-amber-300 px-3 py-1 rounded-md font-semibold cursor-pointer hover:scale-95 transition duration-500">
-              <IoCartOutline className="text-2xl mr-2"/>
-              Cart
-              <span className="w-4 h-4 text-xs grid place-content-center rounded-full border bg-white absolute -top-2 -right-2 text-black font-bold">
-                {cart.products.length === 0 ? "0" : cart.products.length}
-              </span>
+          
+        <Link href="/favourites">
+            <span>
+              <AiOutlineHeart className={"hidden sm:block transition-all cursor-pointer text-2xl hover:text-red-500"}/>
             </span>
           </Link>
-
           <Link href="/auth/login">
-            <FaRegUser
-              className={`hover:text-primary hidden sm:block transition-all cursor-pointer text-xl ${(router.asPath.includes("auth") ||
-              router.asPath.includes("profile")) &&
-            "text-primary"}`}
-            />
+            <span>
+              <FaRegUser className={"hidden sm:block hover:text-amber-500 transition-all cursor-pointer text-xl"}/>
+            </span>
+          </Link>
+          
+          <Link href="/cart">
+            <span className="relative ml-1 hidden sm:flex items-center bg-amber-300 px-3 py-1 rounded-md font-semibold cursor-pointer hover:scale-95 transition duration-500">
+              <IoCartOutline className="text-2xl mr-2"/>
+              Cart
+              <span className="w-4 h-4 text-xs grid place-content-center rounded-full border bg-white absolute -top-2 -right-2 text-black font-regular">
+                {cartLength === 0 ? "0" : cartLength}
+              </span>
+            </span>
           </Link>
 
           <button
             className="sm:hidden inline-block"
             onClick={() => setIsMenuModal(!isMenuModal)}
           >
-            { !isMenuModal ? 
+            <div className={`${isMenuModal ? "h-0 w-0" : "h-10 w-10"} bg-red-50 rounded-full grid place-content-center transition-all duration-500 overflow-hidden`}>
+              <CgMenuCake className="text-2xl text-red-400 transition-all" />
+            </div>
 
-              <div className="bg-red-50 h-10 w-10 rounded-full grid place-content-center">
-                <FaHamburger className="text-2xl text-red-400 transition-all" />
-              </div>:
+            <div className={`${!isMenuModal ? "h-0 w-0" : "h-10 w-10"} bg-red-50 rounded-full grid place-content-center transition-all duration-500 overflow-hidden`}>
               <IoCloseSharp size={25} className="text-red-400 hover:scale-105 transition-all" />
-            }
+            </div>
           </button>
         </div>
       </div>

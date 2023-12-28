@@ -5,7 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
-const Search = ({ setIsSearchModal }) => {
+const Search = ({ setIsMenuModal }) => {
   const [product, setProduct] = useState([]);
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
@@ -56,7 +56,7 @@ const Search = ({ setIsSearchModal }) => {
                         key={item.id}
                         onClick={() => {
                           router.push(`/product/${item?.id}`);
-                          setIsSearchModal(false);
+                          setIsMenuModal(false);
                         }}
                       >
                         <div className="relative flex">

@@ -5,6 +5,7 @@ import Hero from "../../components/Hero";
 import Customers from "../../components/customers/Customers";
 import MenuWrapper from "../../components/product/MenuWrapper";
 import axios from "axios";
+import ForYou from "../../components/foryou";
 
 const Index = ({ categoryList, productList }) => {
 
@@ -13,6 +14,7 @@ const Index = ({ categoryList, productList }) => {
       {/* <Carousel /> */}
       <Hero />
       <Campaigns categoryList={categoryList} />
+      <ForYou productList={productList} />
       <MenuWrapper categoryList={categoryList} productList={productList} />
       <About />
       <Customers />

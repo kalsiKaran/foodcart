@@ -19,23 +19,25 @@ const Hero = () => {
     <Slider {...settings}>
             <Link href="/menu">
                 <div className="relative h-56 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[70vh] w-full overflow-hidden">
-                    <div className="hidden sm:block">
+                    <div className="absolute h-full w-full hidden sm:block">
                         <Image
                             src={`/images/home-banner-1.png`}
                             alt="home-banner"
                             layout="fill"
                             priority
+                            loading="eager"
                             objectFit="cover"
                             className="absolute h-full w-full rounded-xl sm:rounded-none"
                         />
                     </div>
 
-                    <div className="sm:hidden">
+                    <div className="absolute h-full w-full sm:hidden">
                         <Image
                             src={`/images/home-banner-3.png`}
                             alt="home-banner"
                             layout="fill"
                             priority
+                            loading="eager"
                             objectFit="cover"
                             className="absolute h-full w-full rounded-xl sm:rounded-none"
                         />
@@ -54,6 +56,7 @@ const Hero = () => {
                         alt="home-banner"
                         layout="fill"
                         priority
+                        loading="eager"
                         objectFit="cover"
                         className="absolute h-full w-full rounded-xl sm:rounded-none"
                     />

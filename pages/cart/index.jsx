@@ -26,11 +26,16 @@ const Cart = ({ loggedIn }) => {
   const [paymentType, setPaymentType] = useState("HandCash");
   const [productState, setProductState] = useState([]);
   const [tableId, setTableId] = useState(null);
+  const [cartLength, setCartLength] = useState(0);
   
   useEffect(() => {
     const storedTableId = localStorage.getItem('tableId');
     setTableId(storedTableId);
   }, []);
+
+  useEffect(() => {
+    setCartLength(cart.products.length);
+  }, [cartLength]);
 
 
   const newOrder = {
@@ -97,7 +102,7 @@ const Cart = ({ loggedIn }) => {
     <div className="min-h-[calc(100vh_-_433px)] bg-slate-100">
       <div className="flex justify-between md:flex-row flex-col">
         <div className="md:min-h-[calc(100vh_-_433px)] p-2 md:p-4 w-full">
-          {cart.products.length > 0 ? (
+          {cartLength > 0 ? (
             <div className="w-full">
               <Title addClass="text-[40px] text-center mb-4 mt-5">Cart</Title>
 
@@ -144,7 +149,7 @@ const Cart = ({ loggedIn }) => {
           )}
         </div>
 
-        {cart.products.length > 0 &&
+        {cartLength > 0 &&
           <div className="min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col mt-0 md:mt-5 py-8 px-4 md:w-[400px] w-full md:text-start sticky top-0">
             <h6 className="text-xl whitespace-nowrap font-bold mb-3">Payment Method</h6>
 

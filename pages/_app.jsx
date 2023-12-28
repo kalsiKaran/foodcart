@@ -8,7 +8,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Layout from "../layout/Layout";
 
 import { Provider } from "react-redux";
-import store from "../redux/store";
+import { store } from "../redux/store";
 
 import { ToastContainer } from "react-toastify";
 

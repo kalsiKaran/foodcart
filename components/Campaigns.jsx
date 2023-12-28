@@ -89,7 +89,7 @@ const settings = {
 
 
   return (
-    <div className="bg-slate-100 py-6">
+    <div className="py-6">
       <div className="container mx-auto my-5 md:my-10 relative p-5 rounded-lg z-10">
         <Title addClass="text-2xl md:text-4xl uppercase mb-5 md:mb-10 text-center">Our Popular Categories</Title>
         { isMobile ?
