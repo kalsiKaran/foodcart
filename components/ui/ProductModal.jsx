@@ -261,7 +261,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
                 <button className="bg-white text-sm font-semibold text-black py-1 px-3 rounded-lg shadow-md" onClick={() => quantityChange(1, Product)}><i className="fa-solid fa-plus"></i></button>
               </div>
 
-              <button className="flex items-center text-white bg-red-500 py-2 px-3 rounded-lg font-semibold disabled:60" disabled={findCart} onClick={addToCart}>{!findCart ? "Add Item" : "Added"}<span className="ml-2">${TotalPrice}</span></button>
+              <button className="flex items-center text-white bg-red-500 py-2 px-16 rounded-lg font-semibold disabled:opacity-60" disabled={findCart} onClick={addToCart}>{!findCart ? "Add Item" : "Added"}<span className="ml-2">${TotalPrice}</span></button>
             </div>
           }
 
@@ -269,10 +269,10 @@ const ProductModal = ({ setIsProductModal, productId}) => {
 
 
         <button
-          className="absolute -top-10 p-2 md:p-0 bg-neutral-800/70 rounded-full md:rounded-0 md:bg-transparent right-1/2 translate-x-1/2 md:translate-x-0 md:top-4 md:right-4"
+          className="absolute -top-12 p-2 md:p-0 bg-neutral-800/70 rounded-full md:rounded-0 md:bg-transparent right-1/2 translate-x-1/2 md:translate-x-0 md:top-4 md:right-4"
           onClick={() => setIsProductModal(false)}
         >
-          <IoCloseSharp className="text-white text-sm md:text-xl md:text-black hover:text-red-500 hover:scale-110 transition-all" />
+          <IoCloseSharp className="text-white text-xl md:text-black hover:text-red-500 hover:scale-110 transition-all" />
         </button>
       </div>
     </Dialog>
