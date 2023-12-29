@@ -3,6 +3,7 @@ import { RiMedal2Line } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useState } from "react";
 import Favourites from "./Favourites";
+import Recommends from "./Recommends";
 
 const TABS = [
     {
@@ -19,7 +20,7 @@ const Foryou = ({productList}) => {
     const [activeTab, setActiveTab] = useState(1);
 
   return (
-    <div className="bg-slate-100 py-6">
+    <div className="bg-slate-100 pt-5">
         <div className="container mx-auto my-5 relative p-5 rounded-lg z-10">
             <Title addClass="text-2xl md:text-4xl uppercase mb-5 md:mb-10 text-center">For You</Title>
 
@@ -29,6 +30,7 @@ const Foryou = ({productList}) => {
                 ))}
             </div>
 
+            {activeTab === 0 && <Recommends productList={productList} />}
             {activeTab === 1 && <Favourites productList={productList} />}
         </div>
     </div>

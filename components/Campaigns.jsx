@@ -12,7 +12,7 @@ const CampaignItem = ({ category }) => {
   return (
     <>
       <Link href='/menu'>
-        <div className="relative flex flex-col items-center mx-2 cursor-pointer">
+        <div className="relative flex flex-col items-center cursor-pointer">
             {category?.category_image ? 
               <div className="bg-slate-200 shadow-lg relative h-20 max-w-[5rem] md:h-40 w-full md:max-w-[10rem] rounded-full group overflow-hidden">
                 <Image
@@ -34,7 +34,7 @@ const CampaignItem = ({ category }) => {
 
 const Campaigns = ({ categoryList }) => {
   const isMobile = useMediaQuery('(max-width: 640px)');
-  const [showMore, setShowMore] = useState(3);
+  const [showMore, setShowMore] = useState(6);
 
 const settings = {
   dots: false,
@@ -94,7 +94,7 @@ const settings = {
         <Title addClass="text-2xl md:text-4xl uppercase mb-5 md:mb-10 text-center">Our Popular Categories</Title>
         { isMobile ?
           <div className="w-full">
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 gap-y-5">
             { categoryList && categoryList.slice(0, showMore).map(((category, _idx) => (
               <CampaignItem key={_idx} category={category} />
               )))}

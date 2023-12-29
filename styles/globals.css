@@ -29,7 +29,7 @@ body {
   @apply !m-0 !mt-8;
 }
 
-.group-favourite .menu-item{
+.group-sm-card .menu-item{
   @apply h-32;
 }
 

@@ -1,21 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Slider from "react-slick";
 import MenuItem from "../product/MenuItem";
 import { BiBookHeart } from "react-icons/bi";
 import Link from "next/link";
-
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  arrows: false,
-  autoplay: true,
-  autoplaySpeed: 30000,
-};
-
 
 const Favourites = ({productList}) => {
   const [filterList, setFilterList] = useState([]);
@@ -32,12 +19,12 @@ const Favourites = ({productList}) => {
       {filterList.length > 0 ?
         <div className="flex items-center px-3 -mr-6 -ml-3 pb-10 mt-10 snap-x overflow-x-auto scrollbar-hidden">
           {filterList.map((item, _idx) => (
-            <div key={_idx} className="mr-3 min-w-[220px] sm:min-w-[280px] snap-center group-favourite">
+            <div key={_idx} className="mr-3 min-w-[220px] sm:min-w-[280px] snap-center group-sm-card">
               <MenuItem product={item} />
             </div>
           ))}
         </div>:
-        <div className="flex flex-col items-center pt-10">
+        <div className="flex flex-col items-center py-10">
           <BiBookHeart className="text-6xl text-gray-400 -rotate-12" />
           <span className="text-center my-4 text-gray-400 text-sm sm:text-lg">Seems like there&apos;s nothing in your favorites yet. <br /> Let&apos;s change that!</span>
           <Link href="/menu">
