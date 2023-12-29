@@ -17,7 +17,7 @@ const TABS = [
 ]
 
 const Foryou = ({productList}) => {
-    const [activeTab, setActiveTab] = useState(1);
+    const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div className="bg-slate-100 pt-5">
