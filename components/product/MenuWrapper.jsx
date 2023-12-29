@@ -39,7 +39,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
             ))}
         </div>
       </div>
-      <div className="px-3 md:px-0 mt-8 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 min-h-[340px] md:min-h-[380px]">
+      <div className="px-3 md:px-0 mt-8 grid md:grid-cols-3 grid-cols-2 gap-2 sm:gap-4">
         {filter?.length > 0 &&
           filter
             .slice(0, productLimit)

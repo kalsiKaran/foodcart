@@ -189,14 +189,14 @@ const ProductModal = ({ setIsProductModal, productId}) => {
 
         {/* Mobile view */}
         <div className="sm:hidden">
-          <div className="bg-white p-3 rounded-t-xl flex items-center shadow-sm">
+          <div className="bg-white p-3 rounded-t-xl flex flex-col shadow-sm">
             { Loading ? 
             <>
-              <Skeleton height={60} width={96} />
-              <Skeleton height={28} width={150} style={{marginLeft: 16}} />
+              <Skeleton height={192} width="100%" />
+              <Skeleton height={28} width={150} style={{marginTop: 10}} />
             </>:
             <>
-              <div className="relative w-24 h-16 rounded-xl overflow-hidden">
+              <div className="relative w-full h-48 rounded-xl overflow-hidden">
                 {Product.product_image &&
                   <Image
                     src={Product.product_image}
@@ -206,12 +206,12 @@ const ProductModal = ({ setIsProductModal, productId}) => {
                   />
                 }
               </div>
-              <Title addClass="ml-4 inline-block text-2xl cursor-pointer">{Product.product_name}</Title>
+              <Title addClass="mt-2 inline-block text-2xl cursor-pointer">{Product.product_name}</Title>
             </>
             }
           </div>
 
-          <div className="px-3 max-h-[50vh] overflow-auto my-4">
+          <div className="px-3 max-h-[35vh] overflow-auto my-4">
             <div className="bg-white rounded-xl p-3">
               {Loading ? 
                 <>
