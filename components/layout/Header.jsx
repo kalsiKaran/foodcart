@@ -92,7 +92,7 @@ const Header = () => {
             </Link>
           </div>
 
-          { false ? 
+          { !isLogin ? 
           <Link href="/auth/login">
             <div className="flex items-center p-4 mt-6 w-full bg-white rounded-lg shadow-sm" onClick={() => setIsMenuModal(false)} >
               <FaRegUser className="text-xl text-red-400" />

@@ -7,9 +7,11 @@ import { registerSchema } from "../../schema/register";
 import { toast } from "react-toastify";
 import { login } from "../../components/Login";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const Register = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onSubmit = async (values, actions) => {
     try {
@@ -19,7 +21,7 @@ const Register = () => {
       );
       if (res.status === 201) {
         const { phone, password } = values;
-        login(phone, password, router);
+        login(phone, password, router, dispatch);
       }
     } catch (err) {
       toast.error(err.response.data.message);

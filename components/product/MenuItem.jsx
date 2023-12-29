@@ -25,7 +25,7 @@ const MenuItem = ({ product }) => {
   };
   return (
     <div className="container relative min-w-[172px] mx-auto bg-white max-w-sm rounded-2xl overflow-hidden shadow-xl transition duration-300 flex flex-col group">
-      <div className="h-32 sm:h-36 md:h-48 overflow-hidden rounded-t-2xl">
+      <div className="h-52 sm:h-36 md:h-48 menu-item overflow-hidden rounded-t-2xl">
         <div className="relative w-full h-full overflow-hidden">
           {product.product_image ? 
             <Image
@@ -44,19 +44,19 @@ const MenuItem = ({ product }) => {
         </div>
       </div>
         <div className="mb-auto px-3">
-          <div className="flex items-center justify-between mt-2 sm:mt-3 mb-2">
+          <div className="flex items-center justify-between mt-2 sm:mt-3">
             <Link href={`/product/${product.id}`}>
               <span className="w-full">
-                <Title addClass="text-lg sm:text-xl font-semibold leading-none truncate">{product.product_name}</Title>
+                <Title addClass="text-lg sm:text-xl font-semibold truncate">{product.product_name}</Title>
               </span>
             </Link>
           </div>
           <h1 className="text-md font-semibold text-gray-500">{product.description}</h1>
         </div>
         <div className="p-3 flex items-center justify-between">
-          <button className="text-white text-xs sm:text-sm sm:font-semibold bg-red-500 py-2 px-4 rounded-lg shadow-md hover:scale-95 transition duration-500 flex items-center w-fit"
+          <button className="text-white text-sm sm:font-semibold bg-red-500 py-2 px-4 rounded-lg shadow-md hover:scale-95 transition duration-500 flex items-center w-fit"
             onClick={() => setIsProductModal(true)}>
-              <RiShoppingCart2Fill /><h6 className="ml-2">Add item</h6>
+              <RiShoppingCart2Fill size={18} /><h6 className="ml-2">Add item</h6>
           </button>
           
           <div className="grid place-items-center text-2xl bg-red-50 cursor-pointer text-white rounded-full h-10 w-10 text-red-500 outline outline-transparent hover:outline-red-500/50 transition-all duration-300 animation" onClick={() => setFavourite(product.id)}>

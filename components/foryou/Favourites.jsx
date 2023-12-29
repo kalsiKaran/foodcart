@@ -30,9 +30,9 @@ const Favourites = ({productList}) => {
   return (
     <div>
       {filterList.length > 0 ?
-        <div className="flex items-center px-3 -mr-6 -ml-3 pb-10 mt-5 snap-x overflow-x-auto scrollbar-hidden">
+        <div className="flex items-center px-3 -mr-6 -ml-3 pb-10 mt-10 snap-x overflow-x-auto scrollbar-hidden">
           {filterList.map((item, _idx) => (
-            <div key={_idx} className="mr-3 min-w-[200px] sm:min-w-[300px] snap-center">
+            <div key={_idx} className="mr-3 min-w-[220px] sm:min-w-[280px] snap-center group-favourite">
               <MenuItem product={item} />
             </div>
           ))}

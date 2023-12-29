@@ -1,3 +1,4 @@
+import { setIsloggedIn } from "../../redux/authSlice";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -5,11 +6,13 @@ import { useState, useEffect } from "react";
 
 import Avatar from "react-avatar";
 import Skeleton from "react-loading-skeleton";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
+  const dispatch = useDispatch()
 
   useEffect(() => {
 
@@ -38,7 +41,8 @@ const Profile = () => {
             theme: "colored",
           });
 
-          router.push("/auth/login")
+          router.push("/auth/login");
+          dispatch(setIsloggedIn(false));
         }
       } catch (err) {
         toast.error(err.response?.data?.message);

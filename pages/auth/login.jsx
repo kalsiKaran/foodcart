@@ -5,13 +5,15 @@ import Title from "../../components/ui/Title";
 import { loginSchema } from "../../schema/login";
 import { login } from "../../components/Login";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const onSubmit = async (values) => {
     const { phone, password } = values;
-    login(phone, password, router);
+    login(phone, password, router, dispatch)
   };
 
   const { values, errors, touched, handleSubmit, handleChange, handleBlur } =

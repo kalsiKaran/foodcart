@@ -1,7 +1,8 @@
 import { toast } from "react-toastify";
 import axios from 'axios';
+import { setIsloggedIn } from "../redux/authSlice";
 
-export const login = async (phone, password, router) => {
+export const login = async (phone, password, router, dispatch) => {
   try {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       phone: phone,
@@ -14,6 +15,7 @@ export const login = async (phone, password, router) => {
         theme: 'colored',
       });
       router.push("/profile")
+      dispatch(setIsloggedIn(true));
       return { success: true };
     } else {
         toast.error('Login failed', {
