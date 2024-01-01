@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { HEADERLINKS } from "../../constants";
 import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
+import MobileCart from "../MobileCart";
 
 
 const Header = () => {
@@ -161,7 +162,9 @@ const Header = () => {
           </button>
         </div>
       </div>
-      
+
+    { (isMobile && cartLength>0 && (router.asPath !== '/cart') ) && <MobileCart cart={cart} />}
+    
     </div>
   );
 };

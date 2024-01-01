@@ -82,7 +82,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
     dispatch(
       addProduct({
         ...Product,
-        quantity: 1,
+        quantity: foodQuantity,
         foodQuantity,
         price: Price,
         totalPrice: TotalPrice,

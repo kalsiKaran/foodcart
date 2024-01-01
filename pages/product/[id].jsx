@@ -48,7 +48,7 @@ const Index = ({ food, Variants }) => {
     dispatch(
       addProduct({
         ...food,
-        quantity: 1,
+        quantity: foodQuantity,
         foodQuantity,
         price: Price,
         totalPrice: TotalPrice,

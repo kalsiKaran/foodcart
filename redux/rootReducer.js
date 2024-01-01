@@ -15,7 +15,7 @@ const cartPersistConfig = {
     key: "cart",
     storage,
     keyPrefix: "redux-",
-    whitelist: ['products', 'price', 'quantity', 'total']
+    whitelist: ['products', 'quantity', 'total']
 }
 const favouritesPersistConfig = {
     key: "favourites",

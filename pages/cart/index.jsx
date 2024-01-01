@@ -35,6 +35,7 @@ const Cart = ({ loggedIn }) => {
 
   useEffect(() => {
     setCartLength(cart.products.length);
+    console.log(cartLength)
   }, [cartLength]);
 
 
@@ -50,7 +51,7 @@ const Cart = ({ loggedIn }) => {
     const productTitles = cart.products.map((product) => {
       return {
         id: product.id,
-        qty: product.foodQuantity,
+        qty: product.quantity,
         price: product.price,
         subtotal: product.totalPrice,
         variant: product.variant || ""
@@ -150,7 +151,7 @@ const Cart = ({ loggedIn }) => {
         </div>
 
         {cartLength > 0 &&
-          <div className="min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col mt-0 md:mt-5 py-8 px-4 md:w-[400px] w-full md:text-start sticky top-0">
+          <div className="min-h-[calc(100vh_-_433px)] md:h-screen flex flex-col mt-0 md:mt-5 py-8 px-4 md:w-[400px] w-full md:text-start sticky top-0  z-10">
             <h6 className="text-xl whitespace-nowrap font-bold mb-3">Payment Method</h6>
 
             <div className="bg-white p-5 pb-2 rounded-md">
@@ -174,14 +175,12 @@ const Cart = ({ loggedIn }) => {
               <p className="mt-4 font-bold text-gray-500 flex justify-between">Total: <span className="text-gray-900 font-bold">${cart.total}</span></p>
             </div>
 
-            <div>
-              <button
-                className="w-full text-white text-md font-semibold bg-amber-400 mt-8 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 whitespace-nowrap"
-                onClick={createOrder}
-              >
-                CHECKOUT NOW!
-              </button>
-            </div>
+            <button
+              className="fixed bottom-0 left-0 sm:relative w-full text-white text-md font-semibold bg-amber-400 mt-8 py-4 sm:py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 whitespace-nowrap"
+              onClick={createOrder}
+            >
+              CHECKOUT NOW!
+            </button>
           </div>
         }
         </div>
