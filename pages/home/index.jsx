@@ -1,6 +1,6 @@
 import React from "react";
 import About from "../../components/About";
-import Campaigns from "../../components/Campaigns";
+import PopularCategories from "../../components/PopularCategories";
 import Hero from "../../components/Hero";
 import Customers from "../../components/customers/Customers";
 import MenuWrapper from "../../components/product/MenuWrapper";
@@ -12,7 +12,7 @@ const Index = ({ categoryList, productList }) => {
   return (
     <React.Fragment>
       <Hero />
-      <Campaigns categoryList={categoryList} />
+      <PopularCategories categoryList={categoryList} />
       <Foryou productList={productList} />
       <MenuWrapper categoryList={categoryList} productList={productList} />
       <About />

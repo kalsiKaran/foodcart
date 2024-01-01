@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Title from "./ui/Title";
 import Slider from "react-slick";
@@ -7,7 +7,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import Skeleton from "react-loading-skeleton";
 import { useMediaQuery } from "@mui/material";
 
-const CampaignItem = ({ category }) => {
+const CategoryItem = ({ category }) => {
 
   return (
     <>
@@ -32,9 +32,15 @@ const CampaignItem = ({ category }) => {
   );
 };
 
-const Campaigns = ({ categoryList }) => {
+const PopularCategories = ({ categoryList }) => {
   const isMobile = useMediaQuery('(max-width: 640px)');
   const [showMore, setShowMore] = useState(6);
+
+  const [Popular, setPopular] = useState([]);
+
+  useEffect(() => {
+    setPopular(categoryList?.filter(item => item.popular === 1));
+  }, [categoryList]);
 
 const settings = {
   dots: false,
@@ -95,18 +101,18 @@ const settings = {
         { isMobile ?
           <div className="w-full">
             <div className="grid grid-cols-3 gap-y-5">
-            { categoryList && categoryList.slice(0, showMore).map(((category, _idx) => (
-              <CampaignItem key={_idx} category={category} />
+            { Popular && Popular.slice(0, showMore).map(((category, _idx) => (
+              <CategoryItem key={_idx} category={category} />
               )))}
             </div>
 
-            { categoryList.length > showMore &&
+            { Popular.length > showMore &&
               <button className="mt-6 text-center border rounded-md p-2 w-full font-semibold text-sm text-slate-600" onClick={() => setShowMore(showMore + 3)}>See more <i className="fas fa-angle-down ml-2"></i></button>
             }
           </div> :
           <Slider {...settings}>
-            {categoryList && categoryList.map(((category, _idx) => (
-              <CampaignItem key={_idx} category={category} />
+            {Popular && Popular.map(((category, _idx) => (
+              <CategoryItem key={_idx} category={category} />
             )))}
           </Slider>
         }
@@ -115,4 +121,4 @@ const settings = {
   );
 };
 
-export default Campaigns;
+export default PopularCategories;
