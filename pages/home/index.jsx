@@ -7,11 +7,11 @@ import MenuWrapper from "../../components/product/MenuWrapper";
 import axios from "axios";
 import Foryou from "../../components/foryou/Foryou";
 
-const Index = ({ categoryList, productList }) => {
+const Index = ({ categoryList, productList, bannerList }) => {
 
   return (
     <React.Fragment>
-      <Hero />
+      <Hero bannerList={bannerList} />
       <PopularCategories categoryList={categoryList} />
       <Foryou productList={productList} />
       <MenuWrapper categoryList={categoryList} productList={productList} />
@@ -23,14 +23,14 @@ const Index = ({ categoryList, productList }) => {
 
 
 export const getServerSideProps = async () => {
-  const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
-  const product = await axios.get(
-    `${process.env.NEXT_PUBLIC_API_URL}/products`
-  );
+  const categories = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/categories`);
+  const products = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products`);
+  const banners = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/banners`);
   return {
     props: {
-      categoryList: res.data ? res.data : [],
-      productList: product.data ? product.data : [],
+      categoryList: categories.data ? categories.data : [],
+      productList: products.data ? products.data : [],
+      bannerList: banners.data ? banners.data : [],
     },
   };
 };

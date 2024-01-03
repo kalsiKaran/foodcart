@@ -4,7 +4,7 @@ import { FOOTER } from '../../constants';
 
 const Footer = () => {
   return (
-    <div className="bg-secondary text-white">
+    <div className="bg-slate-50 text-gray-700 border-t border-t-slate-200">
       <div className="container mx-auto pt-16 pb-6">
         <div className="flex flex-col md:flex-row md:justify-between justify-center text-center md:gap-y-0 gap-y-6 ">
           <div className="md:flex-1">
@@ -32,11 +32,11 @@ const Footer = () => {
           <div className="md:flex-1">
             <Title addClass="text-[38px]">Foodhub</Title>
             <p className="mt-3">{FOOTER?.desc}</p>
-            <div className="flex items-center justify-center mt-5 gap-x-2">
+            <div className="flex items-center justify-center mt-5 gap-x-4">
               {FOOTER?.socialMedia?.map((item, index) => (
                 <a
                   href={item.link}
-                  className="w-8 h-8 grid place-content-center bg-white text-secondary rounded-full hover:text-white hover:bg-primary transition-all transform hover:scale-110 "
+                  className="shadow-md w-8 h-8 grid place-content-center bg-white text-red-500 rounded-full hover:text-white hover:bg-red-500 transition-all duration-500 hover:scale-110 "
                   key={index}
                   target="_blank"
                   rel="noreferrer"
@@ -62,10 +62,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <p className="text-center mt-10">
+      </div>
+        <p className="text-center mt-10 py-6 border-t border-t-gray-300">
           {FOOTER.rights}
         </p>
-      </div>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
+import React from "react";
+import Skeleton from "react-loading-skeleton";
 
-const Hero = () => {
+const Hero = ({bannerList}) => {
     const settings = {
         dots: false,
         infinite: true,
@@ -11,18 +13,19 @@ const Hero = () => {
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 30000,
+        autoplaySpeed: 10000,
     };
 
   return (
       
     <Slider {...settings}>
-            <Link href="/menu">
-                <div className="relative h-56 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[70vh] w-full overflow-hidden">
-                    <div className="absolute h-full w-full hidden sm:block">
+        {bannerList ? bannerList.map((banner => (
+            <React.Fragment key={banner.id}>
+                <Link href="/menu">
+                    <div className="relative h-56 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[70vh] w-full overflow-hidden">
                         <Image
-                            src={`/images/home-banner-1.png`}
-                            alt="home-banner"
+                            src={banner.image}
+                            alt={banner.name}
                             layout="fill"
                             priority
                             loading="eager"
@@ -30,38 +33,13 @@ const Hero = () => {
                             className="absolute h-full w-full rounded-xl sm:rounded-none"
                         />
                     </div>
-
-                    <div className="absolute h-full w-full sm:hidden">
-                        <Image
-                            src={`/images/home-banner-3.png`}
-                            alt="home-banner"
-                            layout="fill"
-                            priority
-                            loading="eager"
-                            objectFit="cover"
-                            className="absolute h-full w-full rounded-xl sm:rounded-none"
-                        />
-                        
-                        <button className="absolute left-3 top-3 bg-amber-400 px-3 py-1 rounded-md text-xs font-bold opacity-90">
-                            50% OFF
-                        </button>
-                    </div>
-                </div>
-            </Link>
-
-            <Link href="/menu">
-                <div className="relative h-56 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[70vh] w-full overflow-hidden">
-                    <Image
-                        src={`/images/home-banner-2.png`}
-                        alt="home-banner"
-                        layout="fill"
-                        priority
-                        loading="eager"
-                        objectFit="cover"
-                        className="absolute h-full w-full rounded-xl sm:rounded-none"
-                    />
-                </div>
-            </Link>
+                </Link>
+            </React.Fragment>
+        ))):
+            <div className="h-56 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[70vh] w-full overflow-hidden">
+                <Skeleton height="100%" width="100%" />
+            </div>
+        }
     </Slider>
   );
 };

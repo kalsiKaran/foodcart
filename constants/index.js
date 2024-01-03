@@ -11,6 +11,8 @@ export const CATEGORIES = `${BASE_URL}/menu`;
 export const SINGLE_PRODUCT = `${BASE_URL}/product`;
 export const PRODUCTS = `${BASE_URL}/products`;
 
+export const BANNERS = `${BASE_URL}/banners`;
+
 
 import { BsCashStack } from "react-icons/bs";
 // import { CgPaypal } from "react-icons/cg";
@@ -44,7 +46,8 @@ export const HEADERLINKS = [
 ]
 
 export const FOOTER = {
-    "email":"demo@gmail.com","phoneNumber":"1234123",
+    "email":"demo@gmail.com",
+    "phoneNumber":"1234123",
     "desc":"Food is life. Life is food.",
     "openingHours":{"day":"Everyday","hour":"08.00 Am - 18.00 Pm"},
     "socialMedia":[
@@ -52,5 +55,5 @@ export const FOOTER = {
         {"icon":"fa fa-instagram","link":"https://instagram.com"},
         {"icon":"fa fa-linkedin","link":"https://linkedin.com"}
     ],
-    "rights": "© 2022 All Rights Reserved"
+    "rights": "© 2024 All Rights Reserved"
 }
