@@ -5,7 +5,7 @@ export default function Index() {
   return (
     <div>
       <Head>
-        <title>Foodhub</title>
+        <title>KANGO CASTLE</title>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link

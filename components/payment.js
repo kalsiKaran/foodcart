@@ -30,8 +30,8 @@ export const makePayment = async () => {
         alert(response.razorpay_signature);
       },
       prefill: {
-        name: "Food hub",
-        email: "foodhub@gmail.com",
+        name: "KANGO CASTLE",
+        email: "kangocastle@gmail.com",
         contact: "9999999999",
       },
     };

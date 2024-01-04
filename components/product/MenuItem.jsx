@@ -40,14 +40,14 @@ const MenuItem = ({ product }) => {
             </div>
           }
           
-          <p className="text-sm font-semibold px-3 py-1 rounded-lg bg-amber-400/70 backdrop-blur-lg absolute right-2 bottom-2">${product.selling_price}</p>
+          <p className="text-sm font-semibold px-3 py-1 rounded-lg bg-amber-400/70 backdrop-blur-lg absolute right-2 bottom-2">₹{product.selling_price}</p>
         </div>
       </div>
         <div className="mb-auto px-3">
           <div className="flex items-center justify-between mt-2 sm:mt-3">
             <Link href={`/product/${product.id}`}>
               <span className="w-full">
-                <Title addClass="text-lg sm:text-xl font-semibold truncate">{product.product_name}</Title>
+                <Title addClass="text-lg sm:text-xl font-semibold truncate cursor-pointer transition duration-400 hover:text-amber-500">{product.product_name}</Title>
               </span>
             </Link>
           </div>

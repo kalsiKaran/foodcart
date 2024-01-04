@@ -58,7 +58,7 @@ const Header = () => {
         isScrolled || router.asPath !== "/home" ?  "bg-slate-50 sticky top-0" : "relative"
       }`}
     >
-      <div className="container mx-auto text-neutral-800 flex justify-between items-center h-full z-50">
+      <div className="container px-4 sm:px-0 mx-auto text-neutral-800 flex justify-between items-center h-full z-50">
         <Logo />
         <nav
           className={`fixed h-full w-full px-6 bg-slate-100 translate-x-full top-[90px] left-0 z-10 transition duration-400 pt-[80px] ${

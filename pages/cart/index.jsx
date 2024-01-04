@@ -35,7 +35,6 @@ const Cart = ({ loggedIn }) => {
 
   useEffect(() => {
     setCartLength(cart.products.length);
-    console.log(cartLength)
   }, [cartLength]);
 
 
@@ -100,7 +99,7 @@ const Cart = ({ loggedIn }) => {
   };
 
   return (
-    <div className="min-h-[calc(100vh_-_433px)] bg-slate-100">
+    <div className="min-h-[calc(100vh_-_433px)] bg-neutral-100">
       <div className="flex justify-between md:flex-row flex-col">
         <div className="md:min-h-[calc(100vh_-_433px)] p-2 md:p-4 w-full">
           {cartLength > 0 ? (
@@ -123,7 +122,7 @@ const Cart = ({ loggedIn }) => {
                           <Link href={'product/'+product.id}><h1 className="cursor-pointer hover:text-amber-400 mt-5 text-xl font-semibold transition duration-500">{product.product_name}</h1></Link>
                         </div>
                         <div className="flex items-center justify-between mt-4">
-                          <p className="font-bold text-xl text-gray-500">${product.price}</p>
+                          <p className="font-bold text-xl text-gray-500">₹{product.price}</p>
                           <div className="flex items-center rounded-lg">
                             <button className="text-white text-sm font-semibold bg-red-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 " onClick={() => quantityChange(0, product)}><i className="fa-solid fa-minus"></i></button>
                               <h6 className="font-bold mx-3">{product.foodQuantity}</h6>
@@ -170,9 +169,9 @@ const Cart = ({ loggedIn }) => {
             <h6 className="text-xl whitespace-nowrap font-bold mb-3 mt-5">Order Summary</h6>
             <div className="bg-white py-5 px-4 rounded-md">
               
-              <p className="font-bold text-gray-500 flex justify-between">Subtotal: <span className="text-gray-900 font-bold">${cart.total}</span></p>
-              <p className="mt-4 font-bold text-gray-500 flex justify-between">Discount: <span className="text-gray-900 font-bold">$0.00</span></p>
-              <p className="mt-4 font-bold text-gray-500 flex justify-between">Total: <span className="text-gray-900 font-bold">${cart.total}</span></p>
+              <p className="font-bold text-gray-500 flex justify-between">Subtotal: <span className="text-gray-900 font-bold">₹{cart.total}</span></p>
+              <p className="mt-4 font-bold text-gray-500 flex justify-between">Discount: <span className="text-gray-900 font-bold">₹0.00</span></p>
+              <p className="mt-4 font-bold text-gray-500 flex justify-between">Total: <span className="text-gray-900 font-bold">₹{cart.total}</span></p>
             </div>
 
             <button

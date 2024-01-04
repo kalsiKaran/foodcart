@@ -31,7 +31,7 @@ const Login = () => {
       id: 1,
       name: "phone",
       type: "phone",
-      placeholder: "Your phone Address",
+      placeholder: "Your Phone Number",
       value: values.phone,
       errorMessage: errors.phone,
       touched: touched.phone,
@@ -48,7 +48,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="w-full py-20 px-5 sm:px-10">
+    <div className="w-full pt-10 sm:pt-20 pb-32 sm:pb-26 px-5 sm:px-10">
       <form
         className="flex flex-col items-center p-10 rounded-md border shadow-xl md:w-1/2 lg:w-1/3 w-full mx-auto bg-white"
         onSubmit={handleSubmit}

@@ -16,7 +16,7 @@ const MobileCart = ({cart}) => {
             <Link href='/cart'>
                 <div className="flex items-center bg-red-500 rounded-lg px-3 py-1">
                     <div className="text-center text-xs font-semibold">
-                        <p className="text-white">${cart.total}</p>
+                        <p className="text-white">₹{cart.total}</p>
                         <p className="text-white/90">View Cart</p>
                     </div>
                     <span className="text-xl text-white ml-3"><IoArrowForwardCircle /></span>

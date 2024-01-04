@@ -133,7 +133,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
                 <Title addClass="inline-block text-[32px] cursor-pointer hover:text-amber-500 transition-all duration-500">{Product.product_name}</Title>
               </span>
             </Link>
-            <p className="font-bold text-red-500 text-xl">${Price}</p>
+            <p className="font-bold text-red-500 text-xl">₹{Price}</p>
           </>
           }
 
@@ -178,7 +178,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
               <button className="text-white text-sm font-semibold bg-red-400 py-1 px-3 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 " onClick={() => quantityChange(0, Product)} disabled={foodQuantity == 1}><i className="fa-solid fa-minus"></i></button>
                 <h6 className="font-bold mx-3">{foodQuantity}</h6>
               <button className="text-white text-sm font-semibold bg-green-400 py-1 px-3 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 " onClick={() => quantityChange(1, Product)}><i className="fa-solid fa-plus"></i></button> 
-                <h6 className="font-bold mx-3 text-xl">${TotalPrice}</h6>
+                <h6 className="font-bold mx-3 text-xl">₹{TotalPrice}</h6>
             </div>
 
               <button className="mt-8 text-white text-sm font-semibold bg-amber-400 py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-500 transform-gpu hover:scale-110 disabled:hover:scale-100 disabled:opacity-60 disabled:shadow-none flex items-center" disabled={findCart} onClick={addToCart}><RiShoppingCart2Fill className="mr-2 text-xl" /> {!findCart ? "ADD TO CART" : "IN CART"}</button>
@@ -261,7 +261,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
                 <button className="bg-white text-sm font-semibold text-black py-1 px-3 rounded-lg shadow-md" onClick={() => quantityChange(1, Product)}><i className="fa-solid fa-plus"></i></button>
               </div>
 
-              <button className="flex items-center text-white bg-red-500 py-2 px-10 rounded-md font-semibold disabled:opacity-60" disabled={findCart} onClick={addToCart}>{!findCart ? "Add Item" : "Added"}<span className="ml-2">${TotalPrice}</span></button>
+              <button className="flex items-center text-white bg-red-500 py-2 px-10 rounded-md font-semibold disabled:opacity-60" disabled={findCart} onClick={addToCart}>{!findCart ? "Add Item" : "Added"}<span className="ml-2">₹{TotalPrice}</span></button>
             </div>
           }
 

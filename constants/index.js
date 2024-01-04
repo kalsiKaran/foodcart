@@ -45,6 +45,19 @@ export const HEADERLINKS = [
     }
 ]
 
+export const FOOTERLINKS = [
+    {
+        "title": "About us",
+        "path": "/about"
+    },{
+        "title": "Privacy Policy",
+        "path": "/privacy-policy"
+    },{
+        "title": "Terms and Conditions",
+        "path": "/terms-and-conditions"
+    }
+]
+
 export const FOOTER = {
     "email":"demo@gmail.com",
     "phoneNumber":"1234123",
