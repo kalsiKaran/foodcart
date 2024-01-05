@@ -20,10 +20,15 @@ const Header = () => {
   const [isMenuModal, setIsMenuModal] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cartLength, setCartLength] = useState(0);
+  const [isLogin, setIsLogin] = useState(0);
   const isMobile = useMediaQuery('(max-width: 640px)');
 
   const cart = useSelector((state) => state.cart);
-  const isLogin = useSelector((state) => state.auth.isLoggedIn);
+  const auth = useSelector((state) => state.auth.isLoggedIn);
+
+  useEffect(() => {
+    setIsLogin(auth);
+  }, [auth]);
 
   const router = useRouter();
 

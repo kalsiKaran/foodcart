@@ -2,21 +2,35 @@ import React, { useEffect, useState } from "react";
 import Title from "../ui/Title";
 import MenuItem from "./MenuItem";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const MenuWrapper = ({ categoryList, productList }) => {
-  const [active, setActive] = useState(0);
+  const router = useRouter();
+  const [active, setActive] = useState(-1);
   const [filter, setFilter] = useState([]);
-  const [productLimit, setProductLimit] = useState(3);
+  const [productLimit, setProductLimit] = useState(12);
 
   useEffect(() => {
-    setFilter(
-      productList?.filter(
-        (product) =>
-          product.category_id ==
-          categoryList[active].id
-      )
-    );
+    if(active !== -1){
+      setFilter(
+        productList?.filter(
+          (product) =>
+            product.category_id ==
+            categoryList[active].id
+        )
+      );
+    }else{
+      setFilter(productList)
+    }
+
   }, [categoryList, active, productList]);
+
+  const {activeCategory} = router.query;
+
+  useEffect(() => {
+    const categoryToActivate = categoryList.findIndex(category => category.id == activeCategory);
+    setActive(categoryToActivate);
+  }, [activeCategory]);
 
   return (
     <div className="container mx-auto pb-16 pt-8 md:pt-16">
@@ -24,7 +38,33 @@ const MenuWrapper = ({ categoryList, productList }) => {
         <Title addClass="text-2xl md:text-4xl uppercase text-center">Our Delicious Menu</Title>
         <div className="mt-5 flex items-center overflow-auto w-full scrollbar-hidden">
           {categoryList &&
-            categoryList.map((category, index) => (
+            <>
+              <button
+                className={`px-4 py-2 font-semibold border-b-2 ${
+                  -1 === active ? "border-b-red-500 text-red-500" : "border-b-transparent"
+                }`}
+                onClick={() => {
+                  setActive(-1);
+                  setProductLimit(12);
+                }}
+              >
+                <div className="flex flex-col items-center">
+                  <div className="relative h-10 w-10 sm:h-16 md:w-16 rounded-full overflow-hidden">
+                    <Image
+                      src="/images/category-all.jpg"
+                      alt="all"
+                      layout="fill"
+                      loading="eager"
+                      className="w-full object-cover group-hover:scale-105 transition-all duration-[3000ms]"
+                    />
+                  </div>
+                  <p className="text-sm sm:text-md font-semibold mt-1 whitespace-nowrap">
+                    All
+                  </p>
+                </div>
+              </button>
+
+            { categoryList.map((category, index) => (
               <button
                 className={`px-4 py-2 font-semibold border-b-2 ${
                   index === active ? "border-b-red-500 text-red-500" : "border-b-transparent"
@@ -32,7 +72,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
                 key={category.id}
                 onClick={() => {
                   setActive(index);
-                  setProductLimit(3);
+                  setProductLimit(12);
                 }}
               >
                 <div className="flex flex-col items-center">
@@ -51,12 +91,14 @@ const MenuWrapper = ({ categoryList, productList }) => {
                     }
                     
                   </div>
-                  <p className="text-sm sm:text-md font-semibold mt-1">
+                  <p className="text-sm sm:text-md font-semibold mt-1 whitespace-nowrap">
                     {category.name}
                   </p>
                 </div>
               </button>
             ))}
+            </>
+            }
         </div>
       </div>
       <div className="px-3 md:px-0 mt-8 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 sm:gap-4">
@@ -69,7 +111,7 @@ const MenuWrapper = ({ categoryList, productList }) => {
         <div className="flex items-center justify-center my-8">
           <button
             className="btn-primary"
-            onClick={() => setProductLimit(productLimit + 3)}
+            onClick={() => setProductLimit(productLimit + 4)}
           >
             View More
           </button>

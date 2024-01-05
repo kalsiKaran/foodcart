@@ -71,7 +71,7 @@ const Search = ({ setIsMenuModal }) => {
                           />
                         </div>
                         <span className="grow ml-5">{item.product_name}</span>
-                        <span className="font-semibold">${item.selling_price}</span>
+                        <span className="font-semibold">₹{item.selling_price}</span>
                       </li>
                     ))
                   ) : (

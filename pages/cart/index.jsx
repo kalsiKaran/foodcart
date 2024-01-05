@@ -99,7 +99,7 @@ const Cart = ({ loggedIn }) => {
   };
 
   return (
-    <div className="min-h-[calc(100vh_-_433px)] bg-neutral-100">
+    <div className="min-h-[calc(100vh_-_433px)] bg-neutral-100 pb-16 sm:pb-0">
       <div className="flex justify-between md:flex-row flex-col">
         <div className="md:min-h-[calc(100vh_-_433px)] p-2 md:p-4 w-full">
           {cartLength > 0 ? (

@@ -11,7 +11,7 @@ const CategoryItem = ({ category }) => {
 
   return (
     <>
-      <Link href='/menu'>
+      <Link href={`/menu?activeCategory=${category?.id}`}>
         <div className="relative flex flex-col items-center cursor-pointer">
             {category?.category_image ? 
               <div className="bg-slate-200 shadow-lg relative h-20 max-w-[5rem] md:h-40 w-full md:max-w-[10rem] rounded-full group overflow-hidden">
@@ -48,11 +48,10 @@ const settings = {
   speed: 500,
   slidesToShow: 6,
   slidesToScroll: 1,
-  autoplay: true,
+  autoplay: false,
   arrows: true,
   nextArrow: <NextBtn />,
   prevArrow: <PrevBtn />,
-  autoplaySpeed: 3000,
   responsive: [
     {
       breakpoint: 1160,
@@ -95,7 +94,7 @@ const settings = {
 
 
   return (
-    <div className="py-6">
+    <div className="py-3">
       <div className="container mx-auto my-5 md:my-10 relative p-5 rounded-lg z-10">
         <Title addClass="text-2xl md:text-4xl uppercase mb-5 md:mb-10 text-center">Our Popular Categories</Title>
         { isMobile ?

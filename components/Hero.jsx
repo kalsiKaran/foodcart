@@ -13,7 +13,7 @@ const Hero = ({bannerList}) => {
         slidesToScroll: 1,
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 10000,
+        autoplaySpeed: 4000,
     };
 
   return (
@@ -22,15 +22,15 @@ const Hero = ({bannerList}) => {
         {bannerList ? bannerList.map((banner => (
             <React.Fragment key={banner.id}>
                 <Link href="/menu">
-                    <div className="relative h-56 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[70vh] w-full overflow-hidden">
+                    <div className="relative h-32 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[80vh] w-full overflow-hidden">
                         <Image
                             src={banner.image}
                             alt={banner.name}
                             layout="fill"
                             priority
-                            loading="eager"
                             objectFit="cover"
-                            className="absolute h-full w-full rounded-xl sm:rounded-none"
+                            loading="eager"
+                            className="absolute h-full w-full rounded-md sm:rounded-none"
                         />
                     </div>
                 </Link>
