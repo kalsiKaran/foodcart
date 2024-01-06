@@ -179,7 +179,7 @@ const Header = () => {
           </ul>
 
         </nav>
-        <div className="sticky bg-slate-50 overflow-hidden top-0 z-[51] flex items-center border-b px-6 py-3">
+        <div className="sticky bg-slate-50 top-0 z-[51] flex items-center border-b px-6 py-3">
           <Search />
         </div>
       </>
