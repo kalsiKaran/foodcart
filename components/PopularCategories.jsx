@@ -106,7 +106,7 @@ const settings = {
             </div>
 
             { Popular.length > showMore &&
-              <button className="mt-6 text-center border rounded-md p-2 w-full font-semibold text-sm text-slate-600" onClick={() => setShowMore(showMore + 3)}>See more <i className="fas fa-angle-down ml-2"></i></button>
+              <button className="mt-6 text-center border rounded-md p-2 w-full font-semibold text-sm text-slate-600" onClick={() => setShowMore(showMore + 6)}>See more <i className="fas fa-angle-down ml-2"></i></button>
             }
           </div> :
           <Slider {...settings}>

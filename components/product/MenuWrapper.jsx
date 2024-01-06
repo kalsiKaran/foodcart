@@ -8,7 +8,6 @@ const MenuWrapper = ({ categoryList, productList }) => {
   const router = useRouter();
   const [active, setActive] = useState(-1);
   const [filter, setFilter] = useState([]);
-  const [productLimit, setProductLimit] = useState(12);
 
   useEffect(() => {
     if(active !== -1){
@@ -45,14 +44,13 @@ const MenuWrapper = ({ categoryList, productList }) => {
                 }`}
                 onClick={() => {
                   setActive(-1);
-                  setProductLimit(12);
                 }}
               >
                 <div className="flex flex-col items-center">
                   <div className="relative h-10 w-10 sm:h-16 md:w-16 rounded-full overflow-hidden">
                     <Image
                       src="/images/category-all.jpg"
-                      alt="all"
+                    alt="all"
                       layout="fill"
                       loading="eager"
                       className="w-full object-cover group-hover:scale-105 transition-all duration-[3000ms]"
@@ -72,7 +70,6 @@ const MenuWrapper = ({ categoryList, productList }) => {
                 key={category.id}
                 onClick={() => {
                   setActive(index);
-                  setProductLimit(12);
                 }}
               >
                 <div className="flex flex-col items-center">
@@ -103,20 +100,8 @@ const MenuWrapper = ({ categoryList, productList }) => {
       </div>
       <div className="px-3 md:px-0 mt-8 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 sm:gap-4">
         {filter?.length > 0 &&
-          filter
-            .slice(0, productLimit)
-            .map((product) => <MenuItem key={product.id} product={product} />)}
+          filter.map((product) => <MenuItem key={product.id} product={product} />)}
       </div>
-      {productLimit < filter?.length &&
-        <div className="flex items-center justify-center my-8">
-          <button
-            className="btn-primary"
-            onClick={() => setProductLimit(productLimit + 4)}
-          >
-            View More
-          </button>
-        </div>
-      }
     </div>
   );
 };

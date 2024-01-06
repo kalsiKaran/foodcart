@@ -106,7 +106,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
         }
       }}
     >
-      <div className="bg-slate-100 sm:bg-white relative sm:grid sm:grid-cols-2 gap-0 sm:gap-10  z-50 w-full bg-white sm:p-10 rounded-2xl">
+      <div className=" sm:bg-white relative sm:grid sm:grid-cols-2 gap-0 sm:gap-10  z-50 w-full bg-white sm:p-10 rounded-2xl">
       
        {/* Desktop */}
         <div className="hidden sm:block relative w-full h-full rounded-xl overflow-hidden">
@@ -130,7 +130,7 @@ const ProductModal = ({ setIsProductModal, productId}) => {
           <>
             <Link href={`/product/${Product.id}`}>
               <span>
-                <Title addClass="inline-block text-[32px] cursor-pointer hover:text-amber-500 transition-all duration-500">{Product.product_name}</Title>
+                <Title addClass="leading-tight inline-block text-[32px] cursor-pointer hover:text-amber-500 transition-all duration-500">{Product.product_name}</Title>
               </span>
             </Link>
             <p className="font-bold text-red-500 text-xl">₹{Price}</p>

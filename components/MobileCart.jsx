@@ -10,7 +10,7 @@ const MobileCart = ({cart}) => {
     const [Remove, setRemove] = useState();
     
   return (
-    <div className="rounded-t-lg overflow-hidden flex fixed left-0 bottom-0 w-full shadow-[0px_-5px_20px_rgba(0,0,0,0.10)]">
+    <div className="rounded-t-lg overflow-hidden flex fixed left-0 bottom-0 w-full shadow-[0px_-5px_20px_rgba(0,0,0,0.10)] z-50">
         <div className="flex items-center justify-between py-3 px-4 bg-white grow">
             <h6 className="font-semibold grow">{cart.quantity} item{cart.quantity>1 && 's'} added</h6>
             <Link href='/cart'>

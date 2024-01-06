@@ -59,7 +59,7 @@ const MenuItem = ({ product }) => {
               <RiShoppingCart2Fill size={18} /><h6 className="ml-2">Add item</h6>
           </button>
           
-          <div className="grid place-items-center text-2xl bg-red-50 cursor-pointer text-white rounded-full h-10 w-10 text-red-500 outline outline-transparent hover:outline-red-500/50 transition-all duration-300 animation" onClick={() => setFavourite(product.id)}>
+          <div className="grid place-items-center text-2xl bg-red-50 cursor-pointer rounded-full h-10 w-10 text-red-500 outline outline-transparent hover:outline-red-500/50 transition-all duration-300 animation" onClick={() => setFavourite(product.id)}>
             {isFavourite ? <AiFillHeart /> : <AiOutlineHeart />}
           </div>
 
