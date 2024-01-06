@@ -22,7 +22,7 @@ const Hero = ({bannerList}) => {
         {bannerList ? bannerList.map((banner => (
             <React.Fragment key={banner.id}>
                 <Link href="/menu">
-                    <div className="relative h-[11rem] my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[80vh] overflow-hidden">
+                    <div className="relative h-32 my-5 mx-auto w-[calc(100%_-_3rem)] sm:my-0 sm:w-full sm:h-[80vh] overflow-hidden">
                         <Image
                             src={banner.image}
                             alt={banner.name}

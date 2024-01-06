@@ -116,7 +116,7 @@ const Header = () => {
           </button>
         </div>
         <nav
-          className={`z-50 fixed h-full w-full px-6 bg-slate-100 translate-x-full ${isScrolled ? "top-5" : "top-[90px]"} left-0 transition-all duration-500 pt-[80px] ${
+          className={`z-[51] fixed h-full w-full px-6 bg-slate-100 translate-x-full ${isScrolled ? "top-5" : "top-[90px]"} left-0 transition-all duration-500 pt-[80px] ${
             isMenuModal === true && "translate-x-0"
           }`}
         >
@@ -179,7 +179,7 @@ const Header = () => {
           </ul>
 
         </nav>
-        <div className="sticky bg-slate-50 overflow-hidden top-0 z-50 flex items-center border-b px-6 py-3">
+        <div className="sticky bg-slate-50 overflow-hidden top-0 z-[51] flex items-center border-b px-6 py-3">
           <Search />
         </div>
       </>
