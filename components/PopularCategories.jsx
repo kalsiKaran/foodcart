@@ -109,11 +109,15 @@ const settings = {
               <button className="mt-6 text-center border rounded-md p-2 w-full font-semibold text-sm text-slate-600" onClick={() => setShowMore(showMore + 6)}>See more <i className="fas fa-angle-down ml-2"></i></button>
             }
           </div> :
-          <Slider {...settings}>
-            {Popular && Popular.map(((category, _idx) => (
-              <CategoryItem key={_idx} category={category} />
-            )))}
-          </Slider>
+          <>
+            {Popular.length>0 &&
+              <Slider {...settings}>
+                {Popular && Popular.map(((category, _idx) => (
+                  <CategoryItem key={_idx} category={category} />
+                )))}
+              </Slider>
+            }
+          </>
         }
       </div>
     </div>

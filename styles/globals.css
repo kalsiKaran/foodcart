@@ -18,15 +18,15 @@ body {
 }
 
 .slick-dots {
-  @apply !flex justify-start w-full;
+  @apply !flex justify-center w-full;
 }
 
 .slick-dots .slick-active div {
-  @apply bg-primary;
+  @apply bg-red-500;
 }
 
 .slick-dots div {
-  @apply !m-0 !mt-8;
+  @apply !m-0 !-mt-4;
 }
 
 .group-sm-card .menu-item{

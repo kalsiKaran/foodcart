@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import About from "../../components/About";
 import PopularCategories from "../../components/PopularCategories";
 import Hero from "../../components/Hero";
@@ -6,8 +6,17 @@ import Customers from "../../components/customers/Customers";
 import MenuWrapper from "../../components/product/MenuWrapper";
 import axios from "axios";
 import Foryou from "../../components/foryou/Foryou";
+import { useRouter } from "next/router";
 
 const Index = ({ categoryList, productList, bannerList }) => {
+  const router = useRouter();
+  
+  useEffect(() => {
+    const { tableId } = router.query;
+    if (tableId) {
+      localStorage.setItem("tableId", tableId);
+    }
+  }, [router.query]);
 
   return (
     <React.Fragment>

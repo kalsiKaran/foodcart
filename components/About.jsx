@@ -20,7 +20,7 @@ const About = () => {
             </div>
         </div>
         <div className="w-full">
-          <Title addClass="text-3xl sm:text-4xl">We Are KANGO CASTLE</Title>
+          <Title addClass="text-3xl sm:text-4xl">Explore Food Delights at Our Venue</Title>
           <p className="my-5 flex flex-col items-center">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt fugit animi dignissimos at sunt ad unde nulla ratione placeat, quisquam necessitatibus recusandae, sint laborum esse libero nihil iure dolores! Repudiandae dolorem at nostrum dolorum. Rerum laborum beatae dicta repellendus soluta earum nisi sit totam voluptatem ullam, explicabo modi dolorum facilis placeat nam deserunt delectus nobis impedit voluptate pariatur quo quia. Atque veniam suscipit et sit illum omnis natus vero facere!
           </p>

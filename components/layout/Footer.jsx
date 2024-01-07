@@ -3,14 +3,15 @@ import Title from "../ui/Title";
 import { FOOTER, FOOTERLINKS } from '../../constants';
 import Image from "next/image";
 import Link from "next/link";
+import Skeleton from "react-loading-skeleton";
 
-const Footer = () => {
+const Footer = ({Config}) => {
   return (
     <div className="bg-secondary text-white border-t border-t-slate-200">
 
     <div className="-mt-10 mb-10">
-      <div className="relative mx-auto p-10 h-24 w-24 outline outline-8 outline-secondary rounded-full overflow-hidden">
-        <Image src="/images/logo.png" alt="logo" layout="fill" />
+      <div className="relative mx-auto h-24 w-24 outline outline-8 outline-secondary rounded-full overflow-hidden">
+        {Config.logo ? <Image src={Config?.logo} alt="logo" layout="fill" priority="true" /> : <Skeleton height={120} width={120} />}
       </div>
     </div>
 
@@ -27,27 +28,27 @@ const Footer = () => {
           <div className="md:flex-1">
             <Title addClass="text-2xl">Contact Us</Title>
             <div className="flex flex-col gap-y-2 mt-3">
-              <a href={FOOTER?.location} target="_blank" rel="noreferrer">
+              <a href={Config?.address} target="_blank" rel="noreferrer">
                 <i className="fa fa-map-marker"></i>
-                <span className="inline-block ml-2">Location</span>
+                <span className="inline-block ml-2">{Config?.address}</span>
               </a>
               <div>
                 <i className="fa fa-phone"></i>
                 <a
                   className="inline-block ml-2"
-                  href={`tel:${FOOTER?.phoneNumber}`}
+                  href={`tel:${Config?.phone}`}
                 >
-                  {FOOTER?.phoneNumber}
+                  {Config?.phone}
                 </a>
               </div>
-              <a href={`mailto:${FOOTER?.email}`}>
+              <a href={`mailto:${Config?.email}`}>
                 <i className="fa fa-envelope"></i>
-                <span className="inline-block ml-2">{FOOTER?.email}</span>
+                <span className="inline-block ml-2">{Config?.email}</span>
               </a>
             </div>
           </div>
           <div className="md:flex-1">
-            <Title addClass="text-3xl">KANGO CASTLE</Title>
+            <Title addClass="text-3xl">{Config?.name}</Title>
             <p className="mt-3">{FOOTER?.desc}</p>
             <div className="flex items-center justify-center mt-5 gap-x-4">
               {FOOTER?.socialMedia?.map((item, index) => (
@@ -68,12 +69,12 @@ const Footer = () => {
             <div className="flex flex-col gap-y-2 mt-3">
               <div>
                 <span className="inline-block ml-2">
-                  {FOOTER?.openingHours?.day}
+                  Everyday
                 </span>
               </div>
               <div>
                 <span className="inline-block ml-2">
-                  {FOOTER?.openingHours?.hour}
+                  {Config?.hours}
                 </span>
               </div>
             </div>
@@ -81,7 +82,7 @@ const Footer = () => {
         </div>
       </div>
         <p className="text-center mt-10 py-6 border-t border-t-gray-600">
-          {FOOTER.rights}
+          {Config?.copyright}
         </p>
     </div>
   );

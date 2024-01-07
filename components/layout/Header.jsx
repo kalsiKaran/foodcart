@@ -14,9 +14,10 @@ import { HEADERLINKS } from "../../constants";
 import { useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import MobileCart from "../MobileCart";
+import Skeleton from "react-loading-skeleton";
 
 
-const Header = () => {
+const Header = ({Config}) => {
   const [isMenuModal, setIsMenuModal] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cartLength, setCartLength] = useState(0);
@@ -72,8 +73,8 @@ const Header = () => {
       }`}
     >
       <div className="container px-0 mx-auto text-neutral-800 flex justify-between items-center h-full z-50">
-        <Logo />
-          <Search setIsMenuModal={setIsMenuModal} />
+        {Config.name ? <Logo logo={Config.name} /> : <Skeleton height={32} width={150} />}
+        <Search setIsMenuModal={setIsMenuModal} />
         <div className="flex gap-x-4 items-center z-50">
           
         <Link href="/favourites">
