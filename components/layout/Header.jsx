@@ -102,7 +102,7 @@ const Header = ({Config}) => {
       </div>:
       <>
         <div className="bg-slate-50 py-4 px-6 mx-auto text-neutral-800 flex justify-between items-center h-full z-50">
-          <Logo />
+        {Config.name ? <Logo logo={Config.name} /> : <Skeleton height={32} width={150} />}
           <button
             className="inline-block z-[60] fixed right-[1.7rem]"
             onClick={() => setIsMenuModal(!isMenuModal)}
