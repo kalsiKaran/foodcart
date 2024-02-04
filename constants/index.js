@@ -31,6 +31,9 @@ export const PAYMENTMETHOD = [
     // }
 ]
 
+export const DISCOUNT = 70;
+export const MAXDISCOUNT = 20;
+
 export const HEADERLINKS = [
     {
         "title": "Home",

@@ -1,4 +1,4 @@
-import { setIsloggedIn } from "../../redux/authSlice";
+import { setIsloggedIn, setPoints } from "../../redux/authSlice";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,6 +8,8 @@ import Avatar from "react-avatar";
 import Skeleton from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { BiWallet } from "react-icons/bi";
+import { DISCOUNT } from "../../constants";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -20,6 +22,7 @@ const Profile = () => {
       try{
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
         setUser(res.data);
+        dispatch(setPoints(res.data?.points));
       }catch(err){
         console.log(err)
         setUser(null);
@@ -52,9 +55,9 @@ const Profile = () => {
   };
 
   return (
-    <div className="w-72 mx-auto border-2 mt-32 sm:mt-16 mb-24 rounded-xl">
+    <div className="w-72 mx-auto border-2 mt-20 sm:mt-16 mb-24 rounded-xl">
         {user ? 
-          <div className="flex flex-col items-center py-8">
+          <div className="relative flex flex-col items-center py-8">
             <div className="relative overflow-hidden h-24 w-24 rounded-full ">
               { user?.photo ? 
                 <Image src={user.photo} alt={user.name} className="h-full w-full" objectFit="cover" layout="fill" />:
@@ -66,6 +69,10 @@ const Profile = () => {
             <div className="grid grid-cols-2 gap-5 mt-6">
               <button className="w-24 rounded-md bg-amber-400 py-2 px-3 font-semibold uppercase text-white hover:scale-110 transition duration-300" onClick={() => router.push('/menu')}>Order</button>
               <button className="w-24 rounded-md bg-red-400 py-2 px-3 font-semibold uppercase text-white hover:scale-110 transition duration-300" onClick={handleSignOut}>Logout</button>
+            </div>
+            <div className="absolute right-2 top-2 flex items-center bg-red-50 text-red-500 py-1 px-2 rounded-md">
+              <BiWallet className="text-xl" />
+              <h6 className="text-md ml-1 font-semibold">{user.points}</h6>
             </div>
           </div>:
           <div className="flex flex-col items-center py-8">

@@ -22,11 +22,14 @@ body {
 }
 
 .slick-dots .slick-active div {
-  @apply bg-red-500;
+  @apply bg-red-500 scale-150;
 }
 
+.slick-dots li{
+  @apply !h-3 !w-3 !mx-1;
+}
 .slick-dots div {
-  @apply !m-0 !-mt-4;
+  @apply !m-0 !-mt-4 transition-all duration-500;
 }
 
 .group-sm-card .menu-item{

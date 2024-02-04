@@ -9,7 +9,7 @@ const authPersistConfig = {
     key: "auth",
     storage,
     keyPrefix: "redux-",
-    whitelist: ['isLoggedIn']
+    whitelist: ['isLoggedIn', 'userPoints']
 }
 const cartPersistConfig = {
     key: "cart",

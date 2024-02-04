@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Slider from "react-slick";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const categoriesSettings = {
   dots: false,
@@ -68,28 +69,51 @@ const MenuWrapper = ({ categoryList, productList }) => {
   const router = useRouter();
   const [active, setActive] = useState(-1);
   const [filter, setFilter] = useState([]);
+  const [limit, setLimit] = useState(4);
+  const [sectionHeight, setSectionHeight] = useState(0);
 
   useEffect(() => {
-    if(active !== -1){
-      setFilter(
-        productList?.filter(
-          (product) =>
-            product.category_id ==
-            categoryList[active].id
-        )
-      );
-    }else{
-      setFilter(productList)
-    }
-
-  }, [categoryList, active, productList]);
-
-  const {activeCategory} = router.query;
-
-  useEffect(() => {
+    const { activeCategory } = router.query;
     const categoryToActivate = categoryList.findIndex(category => category.id == activeCategory);
     setActive(categoryToActivate);
-  }, [activeCategory]);
+  }, [router.query.activeCategory, categoryList]);
+
+  const fetchMoreData = () => {
+    setLimit((prevLimit) => prevLimit + 4);
+  };
+  
+  useEffect(() => {
+    if (active !== -1) {
+      setFilter(
+        productList?.filter(
+          (product) => product.category_id == categoryList[active].id
+        )
+      );
+    } else {
+      setFilter(productList);
+    }
+  }, [categoryList, active, productList]);
+  
+  const handleInfiniteScroll = () => {
+    const sectionElement = document.getElementById('MenuWrapper');
+    if (!sectionElement) return;
+  
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    const sectionBottom = sectionElement.offsetTop + sectionElement.clientHeight;
+  
+    if (scrollTop + clientHeight >= sectionBottom && scrollHeight !== sectionHeight) {
+      setSectionHeight(scrollHeight);
+      setTimeout(() => {
+        fetchMoreData();
+      }, 1000);
+    }
+  };
+  
+  useEffect(() => {
+    window.addEventListener('scroll', handleInfiniteScroll);
+    return () => window.removeEventListener('scroll', handleInfiniteScroll);
+  }, [fetchMoreData]);
+
 
   return (
     <div className="container mx-auto pb-16 pt-8 md:pt-16">
@@ -158,10 +182,20 @@ const MenuWrapper = ({ categoryList, productList }) => {
             </>
             }
       </div>
-      <div className="px-3 md:px-0 mt-8 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 sm:gap-4">
-        {filter?.length > 0 &&
-          filter.map((product) => <MenuItem key={product.id} product={product} />)}
-      </div>
+
+      {/* <InfiniteScroll
+        dataLength={filter.length}
+        next={fetchMoreData}
+        hasMore={hasMore}
+        loader={<div className="text-red-500 text-center py-8"><i className="animate-spin text-red-500 text-3xl fa-solid fa-spinner"></i></div>}
+        scrollThreshold={0.6}
+      > */}
+        <div id="MenuWrapper" className="px-3 pb-8 mt-8 grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 sm:gap-4">
+          {filter?.length > 0 &&
+            filter.slice(0, limit).map((product) => <MenuItem key={product.id} product={product} />)}
+        </div>
+          { filter.length > limit && <div className="text-red-500 text-center py-4"><i className="animate-spin text-red-500 text-3xl fa-solid fa-spinner"></i></div>}
+      {/* </InfiniteScroll> */}
     </div>
   );
 };

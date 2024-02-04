@@ -27,7 +27,7 @@ const Index = ({ food, Variants }) => {
     }else{
       setInCart(false);
     }
-  }, [cart])
+  }, [cart, food])
 
 
   const dispatch = useDispatch();

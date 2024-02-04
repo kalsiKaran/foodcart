@@ -9,7 +9,7 @@ const handler = async (req, res) => {
       const categories = await axios.get(CATEGORIES);
       res.status(200).json(categories.data.categories);
     } catch (err) {
-      console.log(err);
+      console.log('error logged',err);
     }
   }
 };

@@ -17,7 +17,7 @@ const settings = {
     </div>
   ),
   customPaging: (i) => (
-    <div className="w-3 h-3 border border-red-400 rounded-full"></div>
+    <div className="w-2 h-2 border border-red-400 rounded-full"></div>
   ),
 
   responsive: [
