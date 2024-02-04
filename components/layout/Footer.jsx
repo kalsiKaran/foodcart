@@ -28,23 +28,26 @@ const Footer = ({Config}) => {
           <div className="md:flex-1">
             <Title addClass="text-2xl">Contact Us</Title>
             <div className="flex flex-col gap-y-2 mt-3">
-              <Link href={Config?.address} target="_blank" rel="noreferrer">
+              <span>
                 <i className="fa fa-map-marker"></i>
                 <span className="inline-block ml-2">{Config?.address}</span>
-              </Link>
+              </span>
               <div>
-                <i className="fa fa-phone"></i>
-                <Link
-                  className="inline-block ml-2"
-                  href={`tel:${Config?.phone}`}
-                >
-                  {Config?.phone}
-                </Link>
+                {Config.phone && <Link href={`tel:${Config.phone}`}>
+                  <span className="cursor-pointer">
+                    <i className="fa fa-phone"></i>
+                    <span className="ml-2">{Config?.phone}</span>
+                  </span>
+                </Link>}
               </div>
-              <Link href={`mailto:${Config?.email}`}>
-                <i className="fa fa-envelope"></i>
-                <span className="inline-block ml-2">{Config?.email}</span>
-              </Link>
+              {Config.email &&
+                <Link href={`mailto:${Config?.email}`}>
+                  <span className="cursor-pointer">
+                    <i className="fa fa-envelope"></i>
+                    <span className="inline-block ml-2">{Config?.email}</span>
+                  </span>
+                </Link>
+              }
             </div>
           </div>
           <div className="md:flex-1">
