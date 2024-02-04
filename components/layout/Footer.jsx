@@ -28,23 +28,23 @@ const Footer = ({Config}) => {
           <div className="md:flex-1">
             <Title addClass="text-2xl">Contact Us</Title>
             <div className="flex flex-col gap-y-2 mt-3">
-              <a href={Config?.address} target="_blank" rel="noreferrer">
+              <Link href={Config?.address} target="_blank" rel="noreferrer">
                 <i className="fa fa-map-marker"></i>
                 <span className="inline-block ml-2">{Config?.address}</span>
-              </a>
+              </Link>
               <div>
                 <i className="fa fa-phone"></i>
-                <a
+                <Link
                   className="inline-block ml-2"
                   href={`tel:${Config?.phone}`}
                 >
                   {Config?.phone}
-                </a>
+                </Link>
               </div>
-              <a href={`mailto:${Config?.email}`}>
+              <Link href={`mailto:${Config?.email}`}>
                 <i className="fa fa-envelope"></i>
                 <span className="inline-block ml-2">{Config?.email}</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="md:flex-1">
@@ -52,7 +52,7 @@ const Footer = ({Config}) => {
             <p className="mt-3">{FOOTER?.desc}</p>
             <div className="flex items-center justify-center mt-5 gap-x-4">
               {FOOTER?.socialMedia?.map((item, index) => (
-                <a
+                <Link
                   href={item.link}
                   className="shadow-md w-8 h-8 grid place-content-center bg-white text-red-500 rounded-full hover:text-white hover:bg-red-500 transition-all duration-500 hover:scale-110 "
                   key={index}
@@ -60,7 +60,7 @@ const Footer = ({Config}) => {
                   rel="noreferrer"
                 >
                   <i className={item.icon}></i>
-                </a>
+                </Link>
               ))}
             </div>
           </div>

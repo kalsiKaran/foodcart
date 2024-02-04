@@ -165,11 +165,11 @@ const Cart = ({ loggedIn }) => {
               <TbShoppingCartX size={72} />
               <h1 className="text-2xl font-semibold mt-6">Your cart is empty</h1>
               <h1 className="text-md font-regular text-slate-400 mt-2 text-center">Looks like you haven&apos;t made your choice yet..</h1>
-              <a href="/menu"
+              <Link href="/menu"
                 className="btn-primary mt-8"
               >
                 Go to menu
-              </a>
+              </Link>
             </div>
           )}
         </div>
