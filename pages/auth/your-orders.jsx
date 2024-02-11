@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 
-const yourOrders = () => {
+const YourOrders = () => {
   const [orders, setOrders] = useState(null);
 
   useEffect(() => {
@@ -80,4 +80,4 @@ export async function getServerSideProps(context) {
 
 }
 
-export default yourOrders;
+export default YourOrders;
