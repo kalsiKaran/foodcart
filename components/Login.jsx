@@ -14,7 +14,7 @@ export const login = async (phone, password, router, dispatch) => {
         position: 'bottom-left',
         theme: 'colored',
       });
-      router.push("/profile")
+      router.push("/")
       dispatch(setIsloggedIn(true));
       return { success: true };
     } else {

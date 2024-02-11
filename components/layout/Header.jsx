@@ -9,20 +9,28 @@ import Logo from "../ui/Logo";
 import Search from "../ui/Search";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HEADERLINKS } from "../../constants";
 import { Popover, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import MobileCart from "../MobileCart";
 import Skeleton from "react-loading-skeleton";
 import { BiWallet } from "react-icons/bi";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { FaRegUserCircle } from "react-icons/fa";
+import { IoFastFoodOutline } from "react-icons/io5";
+import { setIsloggedIn } from "../../redux/authSlice";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Header = ({Config}) => {
+  const dispatch = useDispatch();
   const [isMenuModal, setIsMenuModal] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [cartLength, setCartLength] = useState(0);
-  const [isLogin, setIsLogin] = useState(0);
+  const [isLogin, setIsLogin] = useState(false);
   const [walletPopup, setWalletPopup] = useState(false);
+  const [profilePopup, setProfilePopup] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null); 
   const isMobile = useMediaQuery('(max-width: 640px)');
 
@@ -73,6 +81,34 @@ const Header = ({Config}) => {
     setWalletPopup(!walletPopup);
   }
 
+  const handleProfilPopup = (event) => {
+    setAnchorEl(event.currentTarget);
+    setProfilePopup(!profilePopup);
+  }
+
+  const handleSignOut = async () => {
+    
+    if (confirm("Are you sure you want to sign out?")) {
+      try {
+
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`);
+        if (res.status === 200) {
+          toast.success("Sign out successfully", {
+            position: "bottom-left",
+            theme: "colored",
+          });
+
+          router.push("/auth/login");
+          dispatch(setIsloggedIn(false));
+          setProfilePopup(false);
+        }
+      } catch (err) {
+        toast.error(err.response?.data?.message);
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <>
       {!isMobile ?
@@ -91,11 +127,53 @@ const Header = ({Config}) => {
               <AiOutlineHeart className={"hidden sm:block transition-all cursor-pointer text-2xl hover:text-red-500"}/>
             </span>
           </Link>
-          <Link href="/auth/login">
-            <span>
-              <FaRegUser className={"hidden sm:block hover:text-amber-500 transition-all cursor-pointer text-xl"}/>
-            </span>
-          </Link>
+          
+            {/* profile popup */}
+            {!isLogin ?
+            <span className="hidden sm:block">
+              <Link href="/auth/login">
+                <FaRegUser className={"hover:text-amber-500 transition-all cursor-pointer text-xl"}/>
+              </Link>
+            </span> :
+            <span className="hidden sm:block">
+              <FaRegUser className={"hover:text-amber-500 transition-all cursor-pointer text-xl"} onClick={handleProfilPopup}/>
+              <Popover
+                open={profilePopup}
+                anchorEl={anchorEl}
+                onClose={() => setProfilePopup(false)}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  horizontal: 'center',
+                  vertical: 'top'
+                }}
+                sx={{ top: 10 }}
+              >
+                <div className="pt-2">
+                  <Link href="/profile">
+                    <span className="py-2 px-6 cursor-pointer hover:bg-amber-300/10 flex items-center gap-x-3 text-neutral-600" onClick={handleProfilPopup}>
+                      <FaRegUserCircle className="text-2xl"/>
+                      <span className="font-semibold">Profile</span>
+                    </span>
+                  </Link>
+                  <Link href="/auth/change-password">
+                    <span className="py-2 px-6 cursor-pointer hover:bg-amber-300/10 flex items-center gap-x-3 text-neutral-600" onClick={handleProfilPopup}>
+                      <RiLockPasswordLine className="text-2xl"/>
+                      <span className="font-semibold">Change Password</span>
+                    </span>
+                  </Link>
+                  <Link href="/auth/your-orders">
+                    <span className="py-2 px-6 cursor-pointer hover:bg-amber-300/10 flex items-center gap-x-3 text-neutral-600" onClick={handleProfilPopup}>
+                      <IoFastFoodOutline className="text-2xl"/>
+                      <span className="font-semibold">Your Orders</span>
+                    </span>
+                  </Link>
+                  <h6 className="cursor-pointer hover:bg-red-50/50 mt-2 p-3 text-center uppercase text-sm font-semibold text-red-500 border-t" onClick={handleSignOut}>Logout</h6>
+                </div>
+              </Popover>
+            </span>}
 
           {/* wallet */}
           <BiWallet className={"hover:text-amber-500 transition-all cursor-pointer text-2xl"} onClick={handleWalletPopup}/>
@@ -207,12 +285,26 @@ const Header = ({Config}) => {
                 <h6 className="text-md mt-2">Login / Signup</h6>
               </div>
             </Link>:
-            <Link href="/profile">
-              <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)} >
-                <FaRegUser className="text-3xl text-red-400" />
-                <h6 className="text-md mt-2">Your Profile</h6>
-              </div>
-            </Link>
+            <>
+              <Link href="/profile">
+                <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)} >
+                  <FaRegUser className="text-3xl text-red-400" />
+                  <h6 className="text-md mt-2">Your Profile</h6>
+                </div>
+              </Link>
+              <Link href="/auth/change-password">
+                <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)} >
+                  <RiLockPasswordLine className="text-3xl text-red-400" />
+                  <h6 className="text-md mt-2">Change Password</h6>
+                </div>
+              </Link>
+              <Link href="/auth/your-orders">
+                <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)} >
+                  <IoFastFoodOutline className="text-3xl text-red-400" />
+                  <h6 className="text-md mt-2">Your Orders</h6>
+                </div>
+              </Link>
+            </>
             }
             <div className="h-24 w-full bg-white rounded-xl grid place-items-center place-content-center shadow-md" onClick={() => setIsMenuModal(false)} >
               <BiWallet className="text-3xl text-red-400" />

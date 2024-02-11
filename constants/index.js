@@ -4,6 +4,9 @@ export const LOGIN = `${BASE_URL}/auth/login`;
 export const REGISTER = `${BASE_URL}/auth/register`;
 export const USER = `${BASE_URL}/auth/user`;
 export const LOGOUT = `${BASE_URL}/auth/logout`;
+export const CHANGEPASSWORD = `${BASE_URL}/auth/change-password`;
+export const USERORDERS = `${BASE_URL}/auth/user-orders`;
+
 export const CREATEORDER = `${BASE_URL}/auth/addorder`;
 
 export const CATEGORIES = `${BASE_URL}/menu`;

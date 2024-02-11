@@ -9,12 +9,11 @@ import Skeleton from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { BiWallet } from "react-icons/bi";
-import { DISCOUNT } from "../../constants";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const router = useRouter();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
