@@ -10,6 +10,7 @@ const About = () => {
             <div className="relative h-56 sm:h-96 w-1/2 sm:w-full">
               <Image src="/images/about-grid-2.jpg" alt="about" layout="fill" objectFit="cover" />
             </div>
+            {console.log(process.env.NEXT_PUBLIC_DEV_API_URL)}
             <div className="flex flex-col gap-2 w-1/2 sm:w-full">
               <div className="relative h-1/2 w-full col-span-2">
                 <Image src="/images/about-grid-1.jpg" alt="about" layout="fill" objectFit="cover" />
